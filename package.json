@@ -1,0 +1,30 @@
+{
+  "name": "js-algorithms-and-data-structures",
+  "version": "0.0.4",
+  "description": "Algorithms and data-structures implemented in TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "babel": "babel",
+    "build:watch": "tsc -w --pretty"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Wilfred Lopez",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-typescript": "^7.7.2",
+    "@types/jest": "^24.0.15",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {}
+}
