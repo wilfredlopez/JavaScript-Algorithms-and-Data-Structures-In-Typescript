@@ -1,175 +1,308 @@
-import Comparator from "../../utils/comparator/Comparator";
+import Comparator from "../../utils/comparator/Comparator"
 
-export enum HeapEnum {
-  MinHeap,
-  MaxHeap
-}
-
-type HeapType = HeapEnum | undefined;
-
-export default class Heap<T> {
-  protected heapType: HeapType = undefined;
-
-  private _heap: T[] = [];
-  private get _length() {
-    return this._heap.length;
+export default abstract class Heap<T extends any> {
+  // Array representation of the heap.
+  private heapContainer: T[] = []
+  get length() {
+    return this.heapContainer.length
   }
 
-  private upCompare(a: T, b: T): boolean {
-    if (this.heapType === HeapEnum.MinHeap) {
-      return a > b;
+  protected compare: Comparator<T>
+  constructor(comparatorFunction?: (a: T, b: T) => -1 | 0 | 1) {
+    if (new.target === Heap) {
+      throw new TypeError("Cannot construct Heap instance directly")
     }
-    return a < b;
+    // Array representation of the heap.
+    this.heapContainer = []
+    // Array representation of the heap.
+    this.compare = new Comparator<T>(comparatorFunction)
   }
 
-  private downCompare(a: T, b: T): boolean {
-    if (this.heapType === HeapEnum.MinHeap) {
-      return a < b;
+  /**
+   * @constructs Heap
+   * @param {Function} [comparatorFunction]
+   */
+
+  /**
+   * @param {number} parentIndex
+   * @return {number}
+   */
+  private getLeftChildIndex(parentIndex: number) {
+    return 2 * parentIndex + 1
+  }
+
+  /**
+   * @param {number} parentIndex
+   * @return {number}
+   */
+  protected getRightChildIndex(parentIndex: number) {
+    return 2 * parentIndex + 2
+  }
+
+  /**
+   * @param {number} childIndex
+   * @return {number}
+   */
+  protected getParentIndex(childIndex: number) {
+    return Math.floor((childIndex - 1) / 2)
+  }
+
+  /**
+   * @param {number} childIndex
+   * @return {boolean}
+   */
+  hasParent(childIndex: number) {
+    return this.getParentIndex(childIndex) >= 0
+  }
+
+  /**
+   * @param {number} parentIndex
+   * @return {boolean}
+   */
+  protected hasLeftChild(parentIndex: number) {
+    return this.getLeftChildIndex(parentIndex) < this.heapContainer.length
+  }
+
+  /**
+   * @param {number} parentIndex
+   * @return {boolean}
+   */
+  protected hasRightChild(parentIndex: number) {
+    return this.getRightChildIndex(parentIndex) < this.heapContainer.length
+  }
+
+  /**
+   * @param {number} parentIndex
+   * @return {*}
+   */
+  protected leftChild(parentIndex: number) {
+    return this.heapContainer[this.getLeftChildIndex(parentIndex)]
+  }
+
+  /**
+   * @param {number} parentIndex
+   * @return {*}
+   */
+  rightChild(parentIndex: number) {
+    return this.heapContainer[this.getRightChildIndex(parentIndex)]
+  }
+
+  /**
+   * @param {number} childIndex
+   * @return {*}
+   */
+  parent(childIndex: number) {
+    return this.heapContainer[this.getParentIndex(childIndex)]
+  }
+
+  /**
+   * @param {number} indexOne
+   * @param {number} indexTwo
+   */
+  private swap(indexOne: number, indexTwo: number) {
+    const tmp = this.heapContainer[indexTwo]
+    this.heapContainer[indexTwo] = this.heapContainer[indexOne]
+    this.heapContainer[indexOne] = tmp
+  }
+
+  /**
+   * @return {*}
+   */
+  peek() {
+    if (this.heapContainer.length === 0) {
+      return null
     }
-    return a > b;
+
+    return this.heapContainer[0]
   }
 
-  private getLeftChildIndex(parentIndex: number): number {
-    return parentIndex * 2 + 1;
-  }
-  private getRightChildIndex(parentIndex: number): number {
-    return parentIndex * 2 + 2;
-  }
-  private getParentIndex(childIndex: number): number {
-    return Math.floor((childIndex - 1) / 2);
-  }
-
-  private hasLeftChildIndex(index: number) {
-    return this.getLeftChildIndex(index) < this._length;
-  }
-  private hasRightChildIndex(index: number) {
-    return this.getRightChildIndex(index) < this._length;
-  }
-  private hasParentIndex(index: number) {
-    return this.getParentIndex(index) >= 0;
-  }
-
-  private leftChild(index: number) {
-    return this._heap[this.getLeftChildIndex(index)];
-  }
-  private rightChild(index: number) {
-    return this._heap[this.getRightChildIndex(index)];
-  }
-  private parent(index: number) {
-    return this._heap[this.getParentIndex(index)];
-  }
-
-  private throwIfUninitialized() {
-    if (this.heapType === undefined) {
-      throw new Error("can't call method on base class");
+  /**
+   * @return {*}
+   */
+  poll() {
+    if (this.heapContainer.length === 0) {
+      return null
     }
+
+    if (this.heapContainer.length === 1) {
+      return this.heapContainer.pop()
+    }
+
+    const item = this.heapContainer[0]
+
+    // Move the last element from the end to the head.
+    this.heapContainer[0] = this.heapContainer.pop()!
+    this.heapifyDown()
+
+    return item
   }
 
-  toString() {
-    return this._heap.join(",");
+  /**
+   * @param {*} item
+   * @return {Heap}
+   */
+  add(item: T) {
+    this.heapContainer.push(item)
+    this.heapifyUp()
+    return this
   }
 
-  isEmpty(): boolean {
-    return this._length === 0;
+  /**
+   * @param {*} item
+   * @param {Comparator} [comparator]
+   * @return {Heap}
+   */
+  remove(item: T, comparator = this.compare) {
+    // Find number of items to remove.
+    const numberOfItemsToRemove = this.find(item, comparator).length
+
+    for (let iteration = 0; iteration < numberOfItemsToRemove; iteration += 1) {
+      // We need to find item index to remove each time after removal since
+      // indices are being changed after each heapify process.
+      const indexToRemove = this.find(item, comparator).pop()!
+
+      // If we need to remove last child in the heap then just remove it.
+      // There is no need to heapify the heap afterwards.
+      if (indexToRemove === this.heapContainer.length - 1) {
+        this.heapContainer.pop()
+      } else {
+        // Move last element in heap to the vacant (removed) position.
+        this.heapContainer[indexToRemove] = this.heapContainer.pop()!
+
+        // Get parent.
+        const parentItem = this.parent(indexToRemove)
+
+        // If there is no parent or parent is in correct order with the node
+        // we're going to delete then heapify down. Otherwise heapify up.
+        if (
+          this.hasLeftChild(indexToRemove) &&
+          (!parentItem ||
+            this.pairIsInCorrectOrder(
+              parentItem,
+              this.heapContainer[indexToRemove],
+            ))
+        ) {
+          this.heapifyDown(indexToRemove)
+        } else {
+          this.heapifyUp(indexToRemove)
+        }
+      }
+    }
+
+    return this
   }
 
-  private swap(first: number, second: number) {
-    const temp = this._heap[first];
-    this._heap[first] = this._heap[second];
-    this._heap[second] = temp;
-  }
+  /**
+   * @param {*} item
+   * @param {Comparator} [comparator]
+   * @return {Number[]}
+   */
+  find(item: T, comparator = this.compare) {
+    const foundItemIndices = []
 
-  private swapTailAndRemove(index: number = 0): T | undefined {
-    const lastIndex = this._length - 1;
-    const root = this._heap[index];
-    this.swap(index, lastIndex);
-    this._heap.splice(lastIndex, 1);
-    return root;
-  }
-
-  private heapifyUp(val: T) {
-    let index = this._length - 1;
-    while (
-      this.hasParentIndex(index) &&
-      this.upCompare(this.parent(index), val)
+    for (
+      let itemIndex = 0;
+      itemIndex < this.heapContainer.length;
+      itemIndex += 1
     ) {
-      let parentIndex = this.getParentIndex(index);
-      this.swap(index, parentIndex);
-      index = parentIndex;
-    }
-  }
-
-  private heapifyDown(index: number = 0) {
-    while (this.hasLeftChildIndex(index)) {
-      let smallestIndex = index;
-      const leftChild = this.leftChild(smallestIndex);
-
-      if (this.downCompare(leftChild, this._heap[index])) {
-        smallestIndex = this.getLeftChildIndex(index);
-      }
-
-      if (this.hasRightChildIndex(index)) {
-        const rightChild = this.rightChild(index);
-        if (this.downCompare(rightChild, this._heap[smallestIndex])) {
-          smallestIndex = this.getRightChildIndex(index);
-        }
-      }
-
-      this.swap(index, smallestIndex);
-
-      index++;
-    }
-  }
-
-  add(val: T) {
-    this.throwIfUninitialized();
-
-    this._heap.push(val);
-    this.heapifyUp(val);
-  }
-
-  remove(val: T, comparator?: Comparator<T>): Heap<T> {
-    this.throwIfUninitialized();
-
-    let indicesToRemove = this.find(val, comparator);
-    const length = indicesToRemove.length;
-
-    for (let i = 0; i < length; i++) {
-      let index = indicesToRemove[0];
-      this.swapTailAndRemove(index);
-      this.heapifyDown(index);
-      indicesToRemove = this.find(val, comparator);
-    }
-
-    return this;
-  }
-
-  peek(): T | undefined {
-    return this._heap[0];
-  }
-
-  find(val: T, comparator?: Comparator<T>): number[] {
-    this.throwIfUninitialized();
-
-    let result: number[] = [];
-    for (let i = 0; i < this._length; i++) {
-      if (comparator !== undefined) {
-        if (comparator.equal(this._heap[i], val)) {
-          result.push(i);
-        }
-      } else if (this._heap[i] === val) {
-        result.push(i);
+      if (comparator.equal(item, this.heapContainer[itemIndex])) {
+        foundItemIndices.push(itemIndex)
       }
     }
-    return result;
+
+    return foundItemIndices
   }
 
-  poll(): T | undefined {
-    this.throwIfUninitialized();
+  /**
+   * @return {boolean}
+   */
+  isEmpty() {
+    return !this.heapContainer.length
+  }
 
-    const root = this.swapTailAndRemove();
-    this.heapifyDown();
+  /**
+   * @return {string}
+   */
+  toString() {
+    return this.heapContainer.toString()
+  }
 
-    return root;
+  /**
+   * @param {number} [customStartIndex]
+   */
+  private heapifyUp(customStartIndex?: number) {
+    // Take the last element (last in array or the bottom left in a tree)
+    // in the heap container and lift it up until it is in the correct
+    // order with respect to its parent element.
+    let currentIndex = customStartIndex || this.heapContainer.length - 1
+
+    while (
+      this.hasParent(currentIndex) &&
+      !this.pairIsInCorrectOrder(
+        this.parent(currentIndex),
+        this.heapContainer[currentIndex],
+      )
+    ) {
+      this.swap(currentIndex, this.getParentIndex(currentIndex))
+      currentIndex = this.getParentIndex(currentIndex)
+    }
+  }
+
+  /**
+   * @param {number} [customStartIndex]
+   */
+  private heapifyDown(customStartIndex = 0) {
+    // Compare the parent element to its children and swap parent with the appropriate
+    // child (smallest child for MinHeap, largest child for MaxHeap).
+    // Do the same for next children after swap.
+    let currentIndex = customStartIndex
+    let nextIndex = null
+
+    while (this.hasLeftChild(currentIndex)) {
+      if (
+        this.hasRightChild(currentIndex) &&
+        this.pairIsInCorrectOrder(
+          this.rightChild(currentIndex),
+          this.leftChild(currentIndex),
+        )
+      ) {
+        nextIndex = this.getRightChildIndex(currentIndex)
+      } else {
+        nextIndex = this.getLeftChildIndex(currentIndex)
+      }
+
+      if (
+        this.pairIsInCorrectOrder(
+          this.heapContainer[currentIndex],
+          this.heapContainer[nextIndex],
+        )
+      ) {
+        break
+      }
+
+      this.swap(currentIndex, nextIndex)
+      currentIndex = nextIndex
+    }
+  }
+
+  /**
+   * Checks if pair of heap elements is in correct order.
+   * For MinHeap the first element must be always smaller or equal.
+   * For MaxHeap the first element must be always bigger or equal.
+   *
+   * @param {*} firstElement
+   * @param {*} secondElement
+   * @return {boolean}
+   */
+  /* istanbul ignore next */
+  protected pairIsInCorrectOrder(firstElement: T, secondElement: T): boolean {
+    throw new Error(`
+      You have to implement heap pair comparision method
+      for ${firstElement} and ${secondElement} values.
+    `)
+
+    // return this.compare.equal(firstElement, secondElement)
+
+    // return true
   }
 }

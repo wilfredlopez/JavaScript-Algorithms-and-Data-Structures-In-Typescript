@@ -1,6 +1,6 @@
 import DoublyLinkedListNode from "../DoublyLinkedListNode"
 
-describe.skip("DoublyLinkedListNode", () => {
+describe("DoublyLinkedListNode", () => {
   it("should create list node with value", () => {
     const node = new DoublyLinkedListNode(1)
 

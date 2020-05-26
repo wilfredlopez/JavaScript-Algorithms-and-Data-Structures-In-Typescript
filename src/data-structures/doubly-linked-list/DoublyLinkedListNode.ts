@@ -15,10 +15,6 @@ export default class DoublyLinkedListNode<T extends any> {
     // this.next = args[1] || null
   }
 
-  append(value: T) {
-    if (!this.value) this.value = value
-  }
-
   toString(callback?: (arg: T) => string): string {
     if (!callback) {
       return String(this.value)
