@@ -4,7 +4,9 @@
  * @param {*[]} setB
  * @return {*[]}
  */
-export default function cartesianProduct(setA, setB) {
+export default function cartesianProduct<T>(setA: T[], setB: T[]): Array<T[]>;
+export default function cartesianProduct<T>(setA: T[], setB: null): never[];
+export default function cartesianProduct<T>(setA: T[], setB: T[] | null) {
   // Check if input sets are not empty.
   // Otherwise return null since we can't generate Cartesian Product out of them.
   if (!setA || !setB || !setA.length || !setB.length) {
@@ -12,7 +14,7 @@ export default function cartesianProduct(setA, setB) {
   }
 
   // Init product set.
-  const product = [];
+  const product: Array<T[]> = [];
 
   // Now, let's go through all elements of a first and second set and form all possible pairs.
   for (let indexA = 0; indexA < setA.length; indexA += 1) {

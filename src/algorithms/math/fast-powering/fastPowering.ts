@@ -8,7 +8,7 @@
  * @param {number} power - The power that number will be raised to.
  * @return {number}
  */
-export default function fastPowering(base, power) {
+export default function fastPowering(base: number, power: number): number {
   if (power === 0) {
     // Anything that is raised to the power of zero is 1.
     return 1;

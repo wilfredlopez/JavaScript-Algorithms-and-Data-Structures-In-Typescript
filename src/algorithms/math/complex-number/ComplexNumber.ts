@@ -1,4 +1,4 @@
-import radianToDegree from '../radian/radianToDegree';
+import radianToDegree from "../radian/radianToDegree";
 
 export default class ComplexNumber {
   /**
@@ -8,6 +8,8 @@ export default class ComplexNumber {
    * @param {number} [re]
    * @param {number} [im]
    */
+  re: number;
+  im: number;
   constructor({ re = 0, im = 0 } = {}) {
     this.re = re;
     this.im = im;
@@ -17,7 +19,7 @@ export default class ComplexNumber {
    * @param {ComplexNumber|number} addend
    * @return {ComplexNumber}
    */
-  add(addend) {
+  add(addend: number | ComplexNumber) {
     // Make sure we're dealing with complex number.
     const complexAddend = this.toComplexNumber(addend);
 
@@ -31,7 +33,7 @@ export default class ComplexNumber {
    * @param {ComplexNumber|number} subtrahend
    * @return {ComplexNumber}
    */
-  subtract(subtrahend) {
+  subtract(subtrahend: number | ComplexNumber) {
     // Make sure we're dealing with complex number.
     const complexSubtrahend = this.toComplexNumber(subtrahend);
 
@@ -45,7 +47,7 @@ export default class ComplexNumber {
    * @param {ComplexNumber|number} multiplicand
    * @return {ComplexNumber}
    */
-  multiply(multiplicand) {
+  multiply(multiplicand: number | ComplexNumber) {
     // Make sure we're dealing with complex number.
     const complexMultiplicand = this.toComplexNumber(multiplicand);
 
@@ -59,7 +61,7 @@ export default class ComplexNumber {
    * @param {ComplexNumber|number} divider
    * @return {ComplexNumber}
    */
-  divide(divider) {
+  divide(divider: number | ComplexNumber) {
     // Make sure we're dealing with complex number.
     const complexDivider = this.toComplexNumber(divider);
 
@@ -81,7 +83,7 @@ export default class ComplexNumber {
   /**
    * @param {ComplexNumber|number} number
    */
-  conjugate(number) {
+  conjugate(number: ComplexNumber | number) {
     // Make sure we're dealing with complex number.
     const complexNumber = this.toComplexNumber(number);
 
@@ -150,7 +152,7 @@ export default class ComplexNumber {
    * @param {ComplexNumber|number} number
    * @return {ComplexNumber}
    */
-  toComplexNumber(number) {
+  toComplexNumber(number: number | ComplexNumber) {
     if (number instanceof ComplexNumber) {
       return number;
     }

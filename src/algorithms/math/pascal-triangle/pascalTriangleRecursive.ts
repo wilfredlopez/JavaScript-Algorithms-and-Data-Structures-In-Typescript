@@ -2,7 +2,7 @@
  * @param {number} lineNumber - zero based.
  * @return {number[]}
  */
-export default function pascalTriangleRecursive(lineNumber) {
+export default function pascalTriangleRecursive(lineNumber: number): number[] {
   if (lineNumber === 0) {
     return [1];
   }
@@ -20,8 +20,12 @@ export default function pascalTriangleRecursive(lineNumber) {
   // last one (since they were and will be filled with 1's) and calculate
   // current coefficient based on previous line.
   for (let numIndex = 0; numIndex < currentLineSize; numIndex += 1) {
-    const leftCoefficient = (numIndex - 1) >= 0 ? previousLine[numIndex - 1] : 0;
-    const rightCoefficient = numIndex < previousLineSize ? previousLine[numIndex] : 0;
+    const leftCoefficient = (numIndex - 1) >= 0
+      ? previousLine[numIndex - 1]
+      : 0;
+    const rightCoefficient = numIndex < previousLineSize
+      ? previousLine[numIndex]
+      : 0;
 
     currentLine[numIndex] = leftCoefficient + rightCoefficient;
   }

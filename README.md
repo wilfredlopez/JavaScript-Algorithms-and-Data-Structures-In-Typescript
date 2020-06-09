@@ -44,7 +44,6 @@ a set of rules that precisely define a sequence of operations.
   - `B` [Factorial](src/algorithms/math/factorial)
   - `B` [Fibonacci Number](src/algorithms/math/fibonacci) - classic and closed-form versions
   - `B` [Primality Test](src/algorithms/math/primality-test) (trial division method)
-
   - `B` [Euclidean Algorithm](src/algorithms/math/euclidean-algorithm) - calculate the Greatest Common Divisor (GCD)
   - `B` [Least Common Multiple](src/algorithms/math/least-common-multiple) (LCM)
   - `B` [Sieve of Eratosthenes](src/algorithms/math/sieve-of-eratosthenes) - finding all prime numbers up to any given limit
@@ -59,8 +58,10 @@ a set of rules that precisely define a sequence of operations.
   - `A` [Discrete Fourier Transform](src/algorithms/math/fourier-transform) - decompose a function of time (a signal) into the frequencies that make it up
 
 - **Sets**
+
   - `B` [Cartesian Product](src/algorithms/sets/cartesian-product) - product of multiple sets
   - `B` [Fisher–Yates Shuffle](src/algorithms/sets/fisher-yates) - random permutation of a finite sequence
+
   - `A` [Power Set](src/algorithms/sets/power-set) - all subsets of a set (bitwise and backtracking solutions)
   - `A` [Permutations](src/algorithms/sets/permutations) (with and without repetitions)
   - `A` [Combinations](src/algorithms/sets/combinations) (with and without repetitions)
@@ -70,6 +71,7 @@ a set of rules that precisely define a sequence of operations.
   - `A` [Knapsack Problem](src/algorithms/sets/knapsack-problem) - "0/1" and "Unbound" ones
   - `A` [Maximum Subarray](src/algorithms/sets/maximum-subarray) - "Brute Force" and "Dynamic Programming" (Kadane's) versions
   - `A` [Combination Sum](src/algorithms/sets/combination-sum) - find all combinations that form specific sum
+
 - **Strings**
   - `B` [Hamming Distance](src/algorithms/string/hamming-distance) - number of positions at which the symbols are different
   - `A` [Levenshtein Distance](src/algorithms/string/levenshtein-distance) - minimum edit distance between two sequences

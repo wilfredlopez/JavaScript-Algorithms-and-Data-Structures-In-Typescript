@@ -1,4 +1,4 @@
-export default class Comparator<T = string> {
+export default class Comparator<T extends any> {
   private compare: (a: T, b: T) => -1 | 0 | 1;
 
   constructor(compareFunction?: (a: T, b: T) => -1 | 0 | 1) {

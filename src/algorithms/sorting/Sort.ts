@@ -8,28 +8,31 @@ import Comparator from "../../utils/comparator/Comparator";
  *  function is visiting the next element.
  */
 
-export default abstract class Sort {
-  protected visitingCallback: () => void = () => {};
-  private comparator: (a: any, b: any) => number;
+export default abstract class Sort<T extends any = any> {
+  protected visitingCallback: (value: T[]) => void = () => {};
+  // protected comparator: (a: T, b: T) => number;
+  protected comparator: Comparator<T>;
 
-  protected lessThan(a: any, b: any) {
-    return this.comparator(a, b) === -1;
+  protected lessThan(a: T, b: T) {
+    return this.comparator.lessThan(a, b);
   }
 
-  protected greaterThan(a: any, b: any) {
-    return this.comparator(a, b) === 1;
+  protected greaterThan(a: T, b: T) {
+    // return this.comparator(a, b) === 1;
+    return this.comparator.greaterThan(a, b);
   }
 
-  protected equal(a: any, b: any) {
-    return this.comparator(a, b) === 0;
+  protected equal(a: T, b: T) {
+    // return this.comparator(a, b) === 0;
+    return this.comparator.equal(a, b);
   }
 
   constructor({
     visitingCallback,
-    compareCallback
+    compareCallback,
   }: {
-    visitingCallback?: () => void;
-    compareCallback?: () => number;
+    visitingCallback?: (value: T[]) => void;
+    compareCallback?: Comparator<T>;
   } = {}) {
     if (visitingCallback !== undefined) {
       this.visitingCallback = visitingCallback;
@@ -38,7 +41,7 @@ export default abstract class Sort {
     if (compareCallback !== undefined) {
       this.comparator = compareCallback;
     } else {
-      this.comparator = (a: number, b: number) => {
+      this.comparator = new Comparator((a, b) => {
         if (a < b) {
           return -1;
         }
@@ -46,9 +49,18 @@ export default abstract class Sort {
           return 1;
         }
         return 0;
-      };
+      });
+      // this.comparator = (a: T, b: T) => {
+      //   if (a < b) {
+      //     return -1;
+      //   }
+      //   if (a > b) {
+      //     return 1;
+      //   }
+      //   return 0;
+      // };
     }
   }
 
-  abstract sort(arr: number[]): number[];
+  abstract sort(arr: T[]): T[];
 }

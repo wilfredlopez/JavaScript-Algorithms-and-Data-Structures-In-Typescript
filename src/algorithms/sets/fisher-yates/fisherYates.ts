@@ -2,7 +2,7 @@
  * @param {*[]} originalArray
  * @return {*[]}
  */
-export default function fisherYates(originalArray) {
+export default function fisherYates<T>(originalArray: T[]) {
   // Clone array from preventing original array from modification (for testing purpose).
   const array = originalArray.slice(0);
 
