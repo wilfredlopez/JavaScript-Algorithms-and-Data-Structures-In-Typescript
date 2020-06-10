@@ -1,5 +1,5 @@
 import BinaryTreeNode from "../../../../data-structures/tree/BinaryTreeNode";
-import depthFirstSearch from "../depthFirstSearch";
+import depthFirstSearch, { TraversalCallbacks } from "../depthFirstSearch";
 
 describe("depthFirstSearch", () => {
   it("should perform DFS operation on tree", () => {
@@ -18,8 +18,8 @@ describe("depthFirstSearch", () => {
     // In-order traversing.
     expect(nodeA.toString()).toBe("D,B,E,A,F,C,G");
 
-    const enterNodeCallback = jest.fn();
-    const leaveNodeCallback = jest.fn();
+    const enterNodeCallback = jest.fn() as any;
+    const leaveNodeCallback = jest.fn() as any;
 
     // Traverse tree without callbacks first to check default ones.
     depthFirstSearch(nodeA);
@@ -27,8 +27,8 @@ describe("depthFirstSearch", () => {
     // Traverse tree with callbacks.
     depthFirstSearch(nodeA, {
       enterNode: enterNodeCallback,
-      leaveNode: leaveNodeCallback
-    });
+      leaveNode: leaveNodeCallback,
+    } as TraversalCallbacks);
 
     expect(enterNodeCallback).toHaveBeenCalledTimes(7);
     expect(leaveNodeCallback).toHaveBeenCalledTimes(7);
@@ -76,12 +76,12 @@ describe("depthFirstSearch", () => {
 
     // Traverse tree with callbacks.
     depthFirstSearch(nodeA, {
-      allowTraversal: (node, child) => {
+      allowTraversal: (node: any, child: any) => {
         // Forbid traversing left part of the tree.
         return child.value !== "B";
       },
       enterNode: enterNodeCallback,
-      leaveNode: leaveNodeCallback
+      leaveNode: leaveNodeCallback,
     });
 
     expect(enterNodeCallback).toHaveBeenCalledTimes(4);

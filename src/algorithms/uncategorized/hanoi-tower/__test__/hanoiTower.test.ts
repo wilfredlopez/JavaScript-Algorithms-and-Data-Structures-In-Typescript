@@ -15,7 +15,7 @@ describe("hanoiTower", () => {
       moveCallback,
       fromPole,
       withPole,
-      toPole
+      toPole,
     });
 
     expect(moveCallback).toHaveBeenCalledTimes(2 ** numberOfDiscs - 1);
@@ -42,7 +42,7 @@ describe("hanoiTower", () => {
 
     hanoiTower({
       numberOfDiscs,
-      moveCallback
+      moveCallback,
     });
 
     expect(moveCallback).toHaveBeenCalledTimes(2 ** numberOfDiscs - 1);
@@ -54,7 +54,7 @@ describe("hanoiTower", () => {
 
     hanoiTower({
       numberOfDiscs,
-      moveCallback
+      moveCallback,
     });
 
     expect(moveCallback).toHaveBeenCalledTimes(2 ** numberOfDiscs - 1);

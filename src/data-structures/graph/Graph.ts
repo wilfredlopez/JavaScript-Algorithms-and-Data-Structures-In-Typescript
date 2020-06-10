@@ -5,14 +5,14 @@ import Matrix, { make } from "./AdjacencyMatrix";
 export default class Graph {
   private vertices: GraphVertex[] = [];
   private edges: GraphEdge[] = [];
-  private directed: boolean;
+  public isDirected: boolean;
 
   constructor(directed: boolean = false) {
-    this.directed = directed;
+    this.isDirected = directed;
   }
 
   toString(): string {
-    return this.vertices.map(s => s.value).join(",");
+    return this.vertices.map((s) => s.value).join(",");
   }
 
   addVertex(vertex: GraphVertex): Graph {
@@ -24,7 +24,7 @@ export default class Graph {
   }
 
   getVertexByKey(key: string): GraphVertex | undefined {
-    return this.vertices.find(s => s.value === key);
+    return this.vertices.find((s) => s.value === key);
   }
 
   getAllVertices(): Array<GraphVertex> {
@@ -41,7 +41,7 @@ export default class Graph {
     this.edges.push(edge);
 
     edge.startVertex.addEdge(edge);
-    if (!this.directed) {
+    if (!this.isDirected) {
       edge.endVertex.addEdge(edge);
     }
 
@@ -49,15 +49,15 @@ export default class Graph {
   }
 
   findEdge(vertexA: GraphVertex, vertexB: GraphVertex): GraphEdge | undefined {
-    if (this.directed) {
+    if (this.isDirected) {
       return this.edges.find(
-        ed => ed.startVertex === vertexA && ed.endVertex === vertexB
+        (ed) => ed.startVertex === vertexA && ed.endVertex === vertexB,
       );
     } else {
       return this.edges.find(
-        ed =>
+        (ed) =>
           (ed.startVertex === vertexA && ed.endVertex === vertexB) ||
-          (ed.endVertex === vertexA && ed.startVertex === vertexB)
+          (ed.endVertex === vertexA && ed.startVertex === vertexB),
       );
     }
   }
@@ -67,7 +67,7 @@ export default class Graph {
   }
 
   deleteEdge(edge: GraphEdge): void {
-    const index = this.edges.findIndex(ed => ed === edge);
+    const index = this.edges.findIndex((ed) => ed === edge);
     if (index === -1) {
       throw new Error("That edge doesn't exist.");
     }
@@ -78,14 +78,14 @@ export default class Graph {
   getNeighbors(vertex: GraphVertex): Array<GraphVertex> {
     let ret: Array<GraphVertex> = [];
 
-    if (!this.directed) {
+    if (!this.isDirected) {
       ret = vertex.getNeighbors();
     } else {
       const edges = this.edges.filter(
-        s => s.endVertex !== vertex && s.startVertex === vertex
+        (s) => s.endVertex !== vertex && s.startVertex === vertex,
       );
       if (edges.length) {
-        ret = edges.map(s => s.endVertex);
+        ret = edges.map((s) => s.endVertex);
       }
     }
     return ret;
@@ -96,7 +96,7 @@ export default class Graph {
   }
 
   reverse() {
-    this.getAllEdges().forEach(edge => edge.reverse());
+    this.getAllEdges().forEach((edge) => edge.reverse());
   }
 
   getVerticesIndices() {

@@ -1,9 +1,11 @@
 import DisjointSetItem from "./DisjointSetItem";
+import GraphVertex from "../graph/GraphVertex";
 
 export default class DisjointSet<T extends any> {
   private _forest: Map<string, DisjointSetItem<T>> = new Map();
-
-  makeSet(val: T): DisjointSet<T> {
+  constructor(public keyCallback?: (graphVertex: GraphVertex) => string) {
+  }
+  makeSet(val: GraphVertex): DisjointSet<T> {
     const key = val.toString();
 
     if (this._forest.has(key)) {
@@ -17,7 +19,7 @@ export default class DisjointSet<T extends any> {
     return this;
   }
 
-  find(val: T): DisjointSetItem<T> | undefined {
+  find(val: GraphVertex): DisjointSetItem<T> | undefined {
     const key = val.toString();
 
     const item = this._forest.get(key);
@@ -25,7 +27,7 @@ export default class DisjointSet<T extends any> {
     return item?.isRoot() ? item : item?.getRoot();
   }
 
-  union(first: T, second: T): DisjointSet<T> {
+  union(first: GraphVertex, second: GraphVertex): DisjointSet<T> {
     const firstRoot = this.find(first);
     const secondRoot = this.find(second);
 
@@ -53,7 +55,7 @@ export default class DisjointSet<T extends any> {
     return this;
   }
 
-  inSameSet(first: T, second: T) {
+  inSameSet(first: GraphVertex, second: GraphVertex) {
     const firstItem = this.find(first);
     const secondItem = this.find(second);
 

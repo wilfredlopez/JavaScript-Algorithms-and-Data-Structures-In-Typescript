@@ -1,7 +1,7 @@
-import Sort from '../Sort';
+import Sort from "../Sort";
 
 export default class ShellSort extends Sort {
-  sort(originalArray) {
+  sort(originalArray: any[]) {
     // Prevent original array from mutations.
     const array = [...originalArray];
 
@@ -17,10 +17,15 @@ export default class ShellSort extends Sort {
 
         while (currentIndex >= 0) {
           // Call visiting callback.
-          this.callbacks.visitingCallback(array[currentIndex]);
+          this.visitingCallback(array[currentIndex]);
 
           // Compare and swap array elements if needed.
-          if (this.comparator.lessThan(array[gapShiftedIndex], array[currentIndex])) {
+          if (
+            this.comparator.lessThan(
+              array[gapShiftedIndex],
+              array[currentIndex],
+            )
+          ) {
             const tmp = array[currentIndex];
             array[currentIndex] = array[gapShiftedIndex];
             array[gapShiftedIndex] = tmp;

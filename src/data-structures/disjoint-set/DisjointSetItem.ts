@@ -1,9 +1,11 @@
+import GraphVertex from "../graph/GraphVertex";
+
 export default class DisjointSetItem<T extends any> {
   private _parent: DisjointSetItem<T> = this;
   private _children: DisjointSetItem<T>[] = [];
-  private _value: T;
+  private _value: GraphVertex;
 
-  constructor(val: T) {
+  constructor(val: GraphVertex) {
     this._value = val;
   }
 
@@ -16,7 +18,7 @@ export default class DisjointSetItem<T extends any> {
 
     let size = 0;
 
-    this.getChildren().forEach(child => {
+    this.getChildren().forEach((child) => {
       size += 1;
       size += child?.getSize() ?? 0;
     });

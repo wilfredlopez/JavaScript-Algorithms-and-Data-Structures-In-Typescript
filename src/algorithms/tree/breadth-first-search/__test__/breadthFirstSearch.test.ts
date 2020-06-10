@@ -27,8 +27,8 @@ describe("breadthFirstSearch", () => {
     // Traverse tree with callbacks.
     breadthFirstSearch(nodeA, {
       enterNode: enterNodeCallback,
-      leaveNode: leaveNodeCallback
-    });
+      leaveNode: leaveNodeCallback,
+    } as any);
 
     expect(enterNodeCallback).toHaveBeenCalledTimes(7);
     expect(leaveNodeCallback).toHaveBeenCalledTimes(7);
@@ -76,12 +76,12 @@ describe("breadthFirstSearch", () => {
 
     // Traverse tree with callbacks.
     breadthFirstSearch(nodeA, {
-      allowTraversal: (node, child) => {
+      allowTraversal: (node: any, child: any) => {
         // Forbid traversing left half of the tree.
         return child.value !== "B";
       },
       enterNode: enterNodeCallback,
-      leaveNode: leaveNodeCallback
+      leaveNode: leaveNodeCallback,
     });
 
     expect(enterNodeCallback).toHaveBeenCalledTimes(4);

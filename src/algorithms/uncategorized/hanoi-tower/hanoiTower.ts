@@ -1,5 +1,12 @@
-import Stack from '../../../data-structures/stack/Stack';
+import Stack from "../../../data-structures/stack/Stack";
 
+interface HanoiTowerRecursiveProps {
+  numberOfDiscs: number;
+  fromPole: Stack<any>;
+  withPole: Stack<any>;
+  toPole: Stack<any>;
+  moveCallback: (disc: number, fromPole: number[], toPole: number[]) => void;
+}
 /**
  * @param {number} numberOfDiscs
  * @param {Stack} fromPole
@@ -13,7 +20,7 @@ function hanoiTowerRecursive({
   withPole,
   toPole,
   moveCallback,
-}) {
+}: HanoiTowerRecursiveProps) {
   if (numberOfDiscs === 1) {
     // Base case with just one disc.
     moveCallback(fromPole.peek(), fromPole.toArray(), toPole.toArray());
@@ -51,6 +58,8 @@ function hanoiTowerRecursive({
   }
 }
 
+type Nullable<T> = T extends null ? T : T | null;
+
 /**
  * @param {number} numberOfDiscs
  * @param {function(disc: number, fromPole: number[], toPole: number[])} moveCallback
@@ -64,11 +73,15 @@ export default function hanoiTower({
   fromPole = new Stack(),
   withPole = new Stack(),
   toPole = new Stack(),
-}) {
+}:
+  & Required<Pick<HanoiTowerRecursiveProps, "numberOfDiscs" | "moveCallback">>
+  & Partial<HanoiTowerRecursiveProps>) {
   // Each of three poles of Tower of Hanoi puzzle is represented as a stack
   // that might contain elements (discs). Each disc is represented as a number.
   // Larger discs have bigger number equivalent.
-
+  fromPole = fromPole || new Stack(),
+    withPole = withPole || new Stack(),
+    toPole = toPole || new Stack();
   // Let's create the discs and put them to the fromPole.
   for (let discSize = numberOfDiscs; discSize > 0; discSize -= 1) {
     fromPole.push(discSize);

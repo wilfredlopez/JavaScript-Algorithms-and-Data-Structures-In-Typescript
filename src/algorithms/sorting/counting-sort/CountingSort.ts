@@ -1,4 +1,4 @@
-import Sort from '../Sort';
+import Sort from "../Sort";
 
 export default class CountingSort extends Sort {
   /**
@@ -6,7 +6,11 @@ export default class CountingSort extends Sort {
    * @param {number} [smallestElement]
    * @param {number} [biggestElement]
    */
-  sort(originalArray, smallestElement = undefined, biggestElement = undefined) {
+  sort(
+    originalArray: any[],
+    smallestElement: any = undefined,
+    biggestElement: any = undefined,
+  ) {
     // Init biggest and smallest elements in array in order to build number bucket array later.
     let detectedSmallestElement = smallestElement || 0;
     let detectedBiggestElement = biggestElement || 0;
@@ -14,7 +18,7 @@ export default class CountingSort extends Sort {
     if (smallestElement === undefined || biggestElement === undefined) {
       originalArray.forEach((element) => {
         // Visit element.
-        this.callbacks.visitingCallback(element);
+        this.visitingCallback(element);
 
         // Detect biggest element.
         if (this.comparator.greaterThan(element, detectedBiggestElement)) {
@@ -30,11 +34,12 @@ export default class CountingSort extends Sort {
 
     // Init buckets array.
     // This array will hold frequency of each number from originalArray.
-    const buckets = Array(detectedBiggestElement - detectedSmallestElement + 1).fill(0);
+    const buckets = Array(detectedBiggestElement - detectedSmallestElement + 1)
+      .fill(0);
 
     originalArray.forEach((element) => {
       // Visit element.
-      this.callbacks.visitingCallback(element);
+      this.visitingCallback(element);
 
       buckets[element - detectedSmallestElement] += 1;
     });
@@ -55,12 +60,16 @@ export default class CountingSort extends Sort {
 
     // Now let's assemble sorted array.
     const sortedArray = Array(originalArray.length).fill(null);
-    for (let elementIndex = 0; elementIndex < originalArray.length; elementIndex += 1) {
+    for (
+      let elementIndex = 0;
+      elementIndex < originalArray.length;
+      elementIndex += 1
+    ) {
       // Get the element that we want to put into correct sorted position.
       const element = originalArray[elementIndex];
 
       // Visit element.
-      this.callbacks.visitingCallback(element);
+      this.visitingCallback(element);
 
       // Get correct position of this element in sorted array.
       const elementSortedPosition = buckets[element - detectedSmallestElement];

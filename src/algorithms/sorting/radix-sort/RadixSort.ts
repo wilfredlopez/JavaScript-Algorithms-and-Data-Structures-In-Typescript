@@ -1,4 +1,4 @@
-import Sort from '../Sort';
+import Sort from "../Sort";
 
 // Using charCode (a = 97, b = 98, etc), we can map characters to buckets from 0 - 25
 const BASE_CHAR_CODE = 97;
@@ -10,7 +10,7 @@ export default class RadixSort extends Sort {
    * @param {*[]} originalArray
    * @return {*[]}
    */
-  sort(originalArray) {
+  sort(originalArray: any[]) {
     // Assumes all elements of array are of the same type
     const isArrayOfNumbers = this.isArrayOfNumbers(originalArray);
 
@@ -20,7 +20,11 @@ export default class RadixSort extends Sort {
     for (let currentIndex = 0; currentIndex < numPasses; currentIndex += 1) {
       const buckets = isArrayOfNumbers
         ? this.placeElementsInNumberBuckets(sortedArray, currentIndex)
-        : this.placeElementsInCharacterBuckets(sortedArray, currentIndex, numPasses);
+        : this.placeElementsInCharacterBuckets(
+          sortedArray,
+          currentIndex,
+          numPasses,
+        );
 
       // Flatten buckets into sortedArray, and repeat at next index
       sortedArray = buckets.reduce((acc, val) => {
@@ -36,14 +40,14 @@ export default class RadixSort extends Sort {
    * @param {number} index
    * @return {*[]}
    */
-  placeElementsInNumberBuckets(array, index) {
+  placeElementsInNumberBuckets(array: any[], index: number) {
     // See below. These are used to determine which digit to use for bucket allocation
     const modded = 10 ** (index + 1);
     const divided = 10 ** index;
     const buckets = this.createBuckets(NUMBER_OF_POSSIBLE_DIGITS);
 
     array.forEach((element) => {
-      this.callbacks.visitingCallback(element);
+      this.visitingCallback(element);
       if (element < divided) {
         buckets[0].push(element);
       } else {
@@ -66,12 +70,20 @@ export default class RadixSort extends Sort {
    * @param {number} numPasses
    * @return {*[]}
    */
-  placeElementsInCharacterBuckets(array, index, numPasses) {
-    const buckets = this.createBuckets(ENGLISH_ALPHABET_LENGTH);
+  placeElementsInCharacterBuckets(
+    array: any[],
+    index: number,
+    numPasses: number,
+  ) {
+    const buckets: any[] = this.createBuckets(ENGLISH_ALPHABET_LENGTH);
 
     array.forEach((element) => {
-      this.callbacks.visitingCallback(element);
-      const currentBucket = this.getCharCodeOfElementAtIndex(element, index, numPasses);
+      this.visitingCallback(element);
+      const currentBucket = this.getCharCodeOfElementAtIndex(
+        element,
+        index,
+        numPasses,
+      );
       buckets[currentBucket].push(element);
     });
 
@@ -84,7 +96,7 @@ export default class RadixSort extends Sort {
    * @param {number} numPasses
    * @return {number}
    */
-  getCharCodeOfElementAtIndex(element, index, numPasses) {
+  getCharCodeOfElementAtIndex(element: any, index: number, numPasses: number) {
     // Place element in last bucket if not ready to organize
     if ((numPasses - index) > element.length) {
       return ENGLISH_ALPHABET_LENGTH - 1;
@@ -103,7 +115,7 @@ export default class RadixSort extends Sort {
    * Number of passes is determined by the length of the longest element in the array.
    * For integers, this log10(num), and for strings, this would be the length of the string.
    */
-  determineNumPasses(array) {
+  determineNumPasses(array: any[]) {
     return this.getLengthOfLongestElement(array);
   }
 
@@ -111,7 +123,7 @@ export default class RadixSort extends Sort {
    * @param {*[]} array
    * @return {number}
    */
-  getLengthOfLongestElement(array) {
+  getLengthOfLongestElement(array: any[]) {
     if (this.isArrayOfNumbers(array)) {
       return Math.floor(Math.log10(Math.max(...array))) + 1;
     }
@@ -125,7 +137,7 @@ export default class RadixSort extends Sort {
    * @param {*[]} array
    * @return {boolean}
    */
-  isArrayOfNumbers(array) {
+  isArrayOfNumbers(array: any[]) {
     // Assumes all elements of array are of the same type
     return this.isNumber(array[0]);
   }
@@ -134,19 +146,19 @@ export default class RadixSort extends Sort {
    * @param {number} numBuckets
    * @return {*[]}
    */
-  createBuckets(numBuckets) {
+  createBuckets(numBuckets: number) {
     /**
      * Mapping buckets to an array instead of filling them with
      * an array prevents each bucket from containing a reference to the same array
      */
-    return new Array(numBuckets).fill(null).map(() => []);
+    return new Array(numBuckets).fill(null).map(() => []) as any[][];
   }
 
   /**
    * @param {*} element
    * @return {boolean}
    */
-  isNumber(element) {
+  isNumber(element: number) {
     return Number.isInteger(element);
   }
 }

@@ -29,7 +29,7 @@ export default class GraphVertex {
   }
 
   deleteEdge(edge: GraphEdge): void {
-    const index = this.edges.findIndex(ed => ed === edge);
+    const index = this.edges.findIndex((ed) => ed === edge);
     this.edges.splice(index, 1);
   }
 
@@ -42,7 +42,7 @@ export default class GraphVertex {
   }
 
   getNeighbors(): Array<GraphVertex> {
-    return this.edges.map(s =>
+    return this.edges.map((s) =>
       s.endVertex !== this ? s.endVertex : s.startVertex
     );
   }
@@ -52,7 +52,7 @@ export default class GraphVertex {
   }
 
   findEdge(vertex: GraphVertex): GraphEdge | null {
-    const edge = this.edges.find(s => s.endVertex === vertex);
+    const edge = this.edges.find((s) => s.endVertex === vertex);
     return edge ? edge : null;
   }
 

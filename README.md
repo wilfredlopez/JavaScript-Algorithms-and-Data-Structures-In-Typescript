@@ -104,9 +104,12 @@ a set of rules that precisely define a sequence of operations.
   - `B` [Depth-First Search](src/algorithms/tree/depth-first-search) (DFS)
   - `B` [Breadth-First Search](src/algorithms/tree/breadth-first-search) (BFS)
 - **Graphs**
+
   - `B` [Depth-First Search](src/algorithms/graph/depth-first-search) (DFS)
   - `B` [Breadth-First Search](src/algorithms/graph/breadth-first-search) (BFS)
-  - `B` [Kruskal’s Algorithm](src/algorithms/graph/kruskal) - finding Minimum Spanning Tree (MST) for weighted undirected graph
+  - `B` [Kruskal’s Algorithm](src/algorithms/graph/kruskal) - finding Minimum Spanning Tree
+    (MST) for weighted undirected graph
+
   - `A` [Dijkstra Algorithm](src/algorithms/graph/dijkstra) - finding shortest paths to all graph vertices from single vertex
   - `A` [Bellman-Ford Algorithm](src/algorithms/graph/bellman-ford) - finding shortest paths to all graph vertices from single vertex
   - `A` [Floyd-Warshall Algorithm](src/algorithms/graph/floyd-warshall) - find shortest paths between all pairs of vertices
@@ -119,12 +122,12 @@ a set of rules that precisely define a sequence of operations.
   - `A` [Hamiltonian Cycle](src/algorithms/graph/hamiltonian-cycle) - Visit every vertex exactly once
   - `A` [Strongly Connected Components](src/algorithms/graph/strongly-connected-components) - Kosaraju's algorithm
   - `A` [Travelling Salesman Problem](src/algorithms/graph/travelling-salesman) - shortest possible route that visits each city and returns to the origin city
+
 - **Cryptography**
   - `B` [Polynomial Hash](src/algorithms/cryptography/polynomial-hash) - rolling hash function based on polynomial
-- **Machine Learning**
-  - `B` [NanoNeuron](https://github.com/trekhleb/nano-neuron) - 7 simple JS functions that illustrate how machines can actually learn (forward/backward propagation)
 - **Uncategorized**
   - `B` [Tower of Hanoi](src/algorithms/uncategorized/hanoi-tower)
+    > HERE
   - `B` [Square Matrix Rotation](src/algorithms/uncategorized/square-matrix-rotation) - in-place algorithm
   - `B` [Jump Game](src/algorithms/uncategorized/jump-game) - backtracking, dynamic programming (top-down + bottom-up) and greedy examples
   - `B` [Unique Paths](src/algorithms/uncategorized/unique-paths) - backtracking, dynamic programming and Pascal's Triangle based examples

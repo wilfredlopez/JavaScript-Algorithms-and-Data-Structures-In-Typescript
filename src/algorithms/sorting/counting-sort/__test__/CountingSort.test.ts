@@ -4,7 +4,7 @@ import {
   notSortedArr,
   reverseArr,
   sortedArr,
-  SortTester
+  SortTester,
 } from "../../SortTester";
 
 // Complexity constants.
@@ -12,14 +12,14 @@ const SORTED_ARRAY_VISITING_COUNT = 60;
 const NOT_SORTED_ARRAY_VISITING_COUNT = 60;
 const REVERSE_SORTED_ARRAY_VISITING_COUNT = 60;
 const EQUAL_ARRAY_VISITING_COUNT = 60;
-
+const Sorter = new SortTester();
 describe("CountingSort", () => {
   it("should sort array", () => {
-    SortTester.testSort(CountingSort);
+    Sorter.testSort(CountingSort);
   });
 
   it("should sort negative numbers", () => {
-    SortTester.testNegativeNumbersSort(CountingSort);
+    Sorter.testNegativeNumbersSort(CountingSort);
   });
 
   it("should allow to use specify max/min integer value in array to make sorting faster", () => {
@@ -35,7 +35,7 @@ describe("CountingSort", () => {
     const sortedArray = sorter.sort(
       notSortedArr,
       smallestElement,
-      biggestElement
+      biggestElement,
     );
 
     expect(sortedArray).toEqual(sortedArr);
@@ -45,34 +45,34 @@ describe("CountingSort", () => {
   });
 
   it("should visit EQUAL array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       CountingSort,
       equalArr,
-      EQUAL_ARRAY_VISITING_COUNT
+      EQUAL_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       CountingSort,
       sortedArr,
-      SORTED_ARRAY_VISITING_COUNT
+      SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit NOT SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       CountingSort,
       notSortedArr,
-      NOT_SORTED_ARRAY_VISITING_COUNT
+      NOT_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit REVERSE SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       CountingSort,
       reverseArr,
-      REVERSE_SORTED_ARRAY_VISITING_COUNT
+      REVERSE_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 });

@@ -10,8 +10,8 @@ describe("traversal", () => {
       .append(2)
       .append(3);
 
-    const traversedNodeValues = [];
-    const traversalCallback = nodeValue => {
+    const traversedNodeValues: any[] = [];
+    const traversalCallback = (nodeValue: any) => {
       traversedNodeValues.push(nodeValue);
     };
 
