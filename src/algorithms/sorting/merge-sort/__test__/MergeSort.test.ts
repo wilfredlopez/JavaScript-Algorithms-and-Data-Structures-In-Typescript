@@ -4,7 +4,7 @@ import {
   notSortedArr,
   reverseArr,
   sortedArr,
-  SortTester
+  SortTester,
 } from "../../SortTester";
 
 // Complexity constants.
@@ -13,52 +13,54 @@ const NOT_SORTED_ARRAY_VISITING_COUNT = 102;
 const REVERSE_SORTED_ARRAY_VISITING_COUNT = 87;
 const EQUAL_ARRAY_VISITING_COUNT = 79;
 
+const Sorter = new SortTester();
+
 describe("MergeSort", () => {
   it("should sort array", () => {
-    SortTester.testSort(MergeSort);
+    Sorter.testSort(MergeSort);
   });
 
   it("should sort array with custom comparator", () => {
-    SortTester.testSortWithCustomComparator(MergeSort);
+    Sorter.testSortWithCustomComparator(MergeSort);
   });
 
   it("should do stable sorting", () => {
-    SortTester.testSortStability(MergeSort);
+    Sorter.testSortStability(MergeSort);
   });
 
   it("should sort negative numbers", () => {
-    SortTester.testNegativeNumbersSort(MergeSort);
+    Sorter.testNegativeNumbersSort(MergeSort);
   });
 
   it("should visit EQUAL array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       MergeSort,
       equalArr,
-      EQUAL_ARRAY_VISITING_COUNT
+      EQUAL_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       MergeSort,
       sortedArr,
-      SORTED_ARRAY_VISITING_COUNT
+      SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit NOT SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       MergeSort,
       notSortedArr,
-      NOT_SORTED_ARRAY_VISITING_COUNT
+      NOT_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit REVERSE SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       MergeSort,
       reverseArr,
-      REVERSE_SORTED_ARRAY_VISITING_COUNT
+      REVERSE_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 });

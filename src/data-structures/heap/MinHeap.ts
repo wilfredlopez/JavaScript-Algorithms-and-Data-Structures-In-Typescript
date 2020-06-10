@@ -1,8 +1,9 @@
-import Heap from "./Heap"
+import Heap from "./Heap";
+import { ComparatorCallBack } from "../../utils/comparator/Comparator";
 
 export default class MinHeap<T> extends Heap<T> {
-  constructor() {
-    super()
+  constructor(compareFn?: ComparatorCallBack) {
+    super(compareFn);
   }
   /**
    * Checks if pair of heap elements is in correct order.
@@ -14,6 +15,6 @@ export default class MinHeap<T> extends Heap<T> {
    * @return {boolean}
    */
   pairIsInCorrectOrder(firstElement: T, secondElement: T) {
-    return this.compare.lessThanOrEqual(firstElement, secondElement)
+    return this.compare.lessThanOrEqual(firstElement, secondElement);
   }
 }

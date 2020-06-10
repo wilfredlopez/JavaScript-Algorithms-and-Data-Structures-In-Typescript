@@ -53,7 +53,7 @@ describe("BinarySearchTree", () => {
   });
 
   it("should insert object values", () => {
-    const nodeValueCompareFunction = (a, b) => {
+    const nodeValueCompareFunction = (a: any, b: any) => {
       const normalizedA = a || { value: null };
       const normalizedB = b || { value: null };
 

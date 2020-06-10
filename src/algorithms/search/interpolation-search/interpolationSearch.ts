@@ -5,7 +5,10 @@
  * @param {*} seekElement
  * @return {number}
  */
-export default function interpolationSearch(sortedArray, seekElement) {
+export default function interpolationSearch(
+  sortedArray: number[],
+  seekElement: number,
+): number {
   let leftIndex = 0;
   let rightIndex = sortedArray.length - 1;
 
@@ -31,7 +34,8 @@ export default function interpolationSearch(sortedArray, seekElement) {
     }
 
     // Do interpolation of the middle index.
-    const middleIndex = leftIndex + Math.floor(valueDelta * indexDelta / rangeDelta);
+    const middleIndex = leftIndex +
+      Math.floor(valueDelta * indexDelta / rangeDelta);
 
     // If we've found the element just return its position.
     if (sortedArray[middleIndex] === seekElement) {

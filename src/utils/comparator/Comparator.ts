@@ -1,7 +1,12 @@
-export default class Comparator<T extends any> {
-  private compare: (a: T, b: T) => -1 | 0 | 1;
+export type ComparatorCallBack<T extends any = any> = (
+  a: T,
+  b: T,
+) => 0 | 1 | -1;
 
-  constructor(compareFunction?: (a: T, b: T) => -1 | 0 | 1) {
+export default class Comparator<T extends any> {
+  private compare: ComparatorCallBack<T>;
+
+  constructor(compareFunction?: ComparatorCallBack<T>) {
     this.compare = compareFunction || this.defaultCompareFunction;
   }
 

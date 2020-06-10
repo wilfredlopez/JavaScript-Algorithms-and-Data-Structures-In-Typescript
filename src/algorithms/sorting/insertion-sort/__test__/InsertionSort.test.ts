@@ -4,7 +4,7 @@ import {
   notSortedArr,
   reverseArr,
   sortedArr,
-  SortTester
+  SortTester,
 } from "../../SortTester";
 
 // Complexity constants.
@@ -13,52 +13,54 @@ const NOT_SORTED_ARRAY_VISITING_COUNT = 101;
 const REVERSE_SORTED_ARRAY_VISITING_COUNT = 210;
 const EQUAL_ARRAY_VISITING_COUNT = 20;
 
+const Sorter = new SortTester();
+
 describe("InsertionSort", () => {
   it("should sort array", () => {
-    SortTester.testSort(InsertionSort);
+    Sorter.testSort(InsertionSort);
   });
 
   it("should sort array with custom comparator", () => {
-    SortTester.testSortWithCustomComparator(InsertionSort);
+    Sorter.testSortWithCustomComparator(InsertionSort);
   });
 
   it("should do stable sorting", () => {
-    SortTester.testSortStability(InsertionSort);
+    Sorter.testSortStability(InsertionSort);
   });
 
   it("should sort negative numbers", () => {
-    SortTester.testNegativeNumbersSort(InsertionSort);
+    Sorter.testNegativeNumbersSort(InsertionSort);
   });
 
   it("should visit EQUAL array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       InsertionSort,
       equalArr,
-      EQUAL_ARRAY_VISITING_COUNT
+      EQUAL_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       InsertionSort,
       sortedArr,
-      SORTED_ARRAY_VISITING_COUNT
+      SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit NOT SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       InsertionSort,
       notSortedArr,
-      NOT_SORTED_ARRAY_VISITING_COUNT
+      NOT_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
   it("should visit REVERSE SORTED array element specified number of times", () => {
-    SortTester.testAlgorithmTimeComplexity(
+    Sorter.testAlgorithmTimeComplexity(
       InsertionSort,
       reverseArr,
-      REVERSE_SORTED_ARRAY_VISITING_COUNT
+      REVERSE_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 });

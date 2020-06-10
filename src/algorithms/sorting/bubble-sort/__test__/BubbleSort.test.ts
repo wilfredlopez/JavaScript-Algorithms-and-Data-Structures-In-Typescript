@@ -4,7 +4,7 @@ import {
   notSortedArr,
   reverseArr,
   sortedArr,
-  SortTester
+  SortTester,
 } from "../../SortTester";
 
 // Complexity constants.
@@ -36,7 +36,7 @@ describe("BubbleSort", () => {
     sortTester.testAlgorithmTimeComplexity(
       BubbleSort,
       equalArr,
-      EQUAL_ARRAY_VISITING_COUNT
+      EQUAL_ARRAY_VISITING_COUNT,
     );
   });
 
@@ -44,7 +44,7 @@ describe("BubbleSort", () => {
     sortTester.testAlgorithmTimeComplexity(
       BubbleSort,
       sortedArr,
-      SORTED_ARRAY_VISITING_COUNT
+      SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
@@ -52,7 +52,7 @@ describe("BubbleSort", () => {
     sortTester.testAlgorithmTimeComplexity(
       BubbleSort,
       notSortedArr,
-      NOT_SORTED_ARRAY_VISITING_COUNT
+      NOT_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
@@ -60,7 +60,7 @@ describe("BubbleSort", () => {
     sortTester.testAlgorithmTimeComplexity(
       BubbleSort,
       reverseArr,
-      REVERSE_SORTED_ARRAY_VISITING_COUNT
+      REVERSE_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 });

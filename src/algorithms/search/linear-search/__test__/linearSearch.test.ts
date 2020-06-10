@@ -18,7 +18,11 @@ describe("linearSearch", () => {
   });
 
   it("should search through objects as well", () => {
-    const comparatorCallback = (a, b) => {
+    const comparatorCallback = (a: {
+      key: number;
+    }, b: {
+      key: number;
+    }) => {
       if (a.key === b.key) {
         return 0;
       }

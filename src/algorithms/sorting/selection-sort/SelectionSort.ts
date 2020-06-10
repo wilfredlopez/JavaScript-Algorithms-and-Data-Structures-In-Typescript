@@ -1,7 +1,7 @@
-import Sort from '../Sort';
+import Sort from "../Sort";
 
 export default class SelectionSort extends Sort {
-  sort(originalArray) {
+  sort(originalArray: any[]) {
     // Clone original array to prevent its modification.
     const array = [...originalArray];
 
@@ -9,12 +9,12 @@ export default class SelectionSort extends Sort {
       let minIndex = i;
 
       // Call visiting callback.
-      this.callbacks.visitingCallback(array[i]);
+      this.visitingCallback(array[i]);
 
       // Find minimum element in the rest of array.
       for (let j = i + 1; j < array.length; j += 1) {
         // Call visiting callback.
-        this.callbacks.visitingCallback(array[j]);
+        this.visitingCallback(array[j]);
 
         if (this.comparator.lessThan(array[j], array[minIndex])) {
           minIndex = j;

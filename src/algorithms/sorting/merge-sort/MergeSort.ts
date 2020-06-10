@@ -1,9 +1,9 @@
-import Sort from '../Sort';
+import Sort from "../Sort";
 
 export default class MergeSort extends Sort {
-  sort(originalArray) {
+  sort(originalArray: any[]): any[] {
     // Call visiting callback.
-    this.callbacks.visitingCallback(null);
+    this.visitingCallback(null as any);
 
     // If array is empty or consists of one element then return this array since it is sorted.
     if (originalArray.length <= 1) {
@@ -23,7 +23,7 @@ export default class MergeSort extends Sort {
     return this.mergeSortedArrays(leftSortedArray, rightSortedArray);
   }
 
-  mergeSortedArrays(leftArray, rightArray) {
+  mergeSortedArrays(leftArray: any[], rightArray: any[]) {
     let sortedArray = [];
 
     // In case if arrays are not of size 1.
@@ -38,7 +38,7 @@ export default class MergeSort extends Sort {
       }
 
       // Call visiting callback.
-      this.callbacks.visitingCallback(minimumElement);
+      this.visitingCallback(minimumElement);
 
       // Push the minimum element of two arrays to the sorted array.
       sortedArray.push(minimumElement);

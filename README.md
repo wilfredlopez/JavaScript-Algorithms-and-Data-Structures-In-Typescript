@@ -61,7 +61,6 @@ a set of rules that precisely define a sequence of operations.
 
   - `B` [Cartesian Product](src/algorithms/sets/cartesian-product) - product of multiple sets
   - `B` [Fisher–Yates Shuffle](src/algorithms/sets/fisher-yates) - random permutation of a finite sequence
-
   - `A` [Power Set](src/algorithms/sets/power-set) - all subsets of a set (bitwise and backtracking solutions)
   - `A` [Permutations](src/algorithms/sets/permutations) (with and without repetitions)
   - `A` [Combinations](src/algorithms/sets/combinations) (with and without repetitions)
@@ -86,15 +85,18 @@ a set of rules that precisely define a sequence of operations.
   - `B` [Binary Search](src/algorithms/search/binary-search) - search in sorted array
   - `B` [Interpolation Search](src/algorithms/search/interpolation-search) - search in uniformly distributed sorted array
 - **Sorting**
+
   - `B` [Bubble Sort](src/algorithms/sorting/bubble-sort)
   - `B` [Selection Sort](src/algorithms/sorting/selection-sort)
   - `B` [Insertion Sort](src/algorithms/sorting/insertion-sort)
   - `B` [Heap Sort](src/algorithms/sorting/heap-sort)
   - `B` [Merge Sort](src/algorithms/sorting/merge-sort)
+
   - `B` [Quicksort](src/algorithms/sorting/quick-sort) - in-place and non-in-place implementations
   - `B` [Shellsort](src/algorithms/sorting/shell-sort)
   - `B` [Counting Sort](src/algorithms/sorting/counting-sort)
   - `B` [Radix Sort](src/algorithms/sorting/radix-sort)
+
 - **Linked Lists**
   - `B` [Straight Traversal](src/algorithms/linked-list/traversal)
   - `B` [Reverse Traversal](src/algorithms/linked-list/reverse-traversal)

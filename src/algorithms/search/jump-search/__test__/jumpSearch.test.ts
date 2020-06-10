@@ -22,18 +22,22 @@ describe("jumpSearch", () => {
     const sortedArrayOfObjects = [
       { key: 1, value: "value1" },
       { key: 2, value: "value2" },
-      { key: 3, value: "value3" }
+      { key: 3, value: "value3" },
     ];
 
-    const comparator = (a, b) => {
+    const comparator = (a: any, b: any) => {
       if (a.key === b.key) return 0;
       return a.key < b.key ? -1 : 1;
     };
 
     expect(jumpSearch([], { key: 1 }, comparator)).toBe(-1);
-    expect(jumpSearch(sortedArrayOfObjects, { key: 4 }, comparator)).toBe(-1);
-    expect(jumpSearch(sortedArrayOfObjects, { key: 1 }, comparator)).toBe(0);
-    expect(jumpSearch(sortedArrayOfObjects, { key: 2 }, comparator)).toBe(1);
-    expect(jumpSearch(sortedArrayOfObjects, { key: 3 }, comparator)).toBe(2);
+    expect(jumpSearch(sortedArrayOfObjects, { key: 4 } as any, comparator))
+      .toBe(-1);
+    expect(jumpSearch(sortedArrayOfObjects, { key: 1 } as any, comparator))
+      .toBe(0);
+    expect(jumpSearch(sortedArrayOfObjects, { key: 2 } as any, comparator))
+      .toBe(1);
+    expect(jumpSearch(sortedArrayOfObjects, { key: 3 } as any, comparator))
+      .toBe(2);
   });
 });

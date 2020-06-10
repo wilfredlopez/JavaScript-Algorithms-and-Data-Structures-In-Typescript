@@ -1,15 +1,15 @@
-import Sort from '../Sort';
-import MinHeap from '../../../data-structures/heap/MinHeap';
+import Sort from "../Sort";
+import MinHeap from "../../../data-structures/heap/MinHeap";
 
 export default class HeapSort extends Sort {
-  sort(originalArray) {
+  sort(originalArray: any[]) {
     const sortedArray = [];
-    const minHeap = new MinHeap(this.callbacks.compareCallback);
+    const minHeap = new MinHeap<any>(this.compareCallback);
 
     // Insert all array elements to the heap.
     originalArray.forEach((element) => {
       // Call visiting callback.
-      this.callbacks.visitingCallback(element);
+      this.visitingCallback(element);
 
       minHeap.add(element);
     });
@@ -20,7 +20,7 @@ export default class HeapSort extends Sort {
       const nextMinElement = minHeap.poll();
 
       // Call visiting callback.
-      this.callbacks.visitingCallback(nextMinElement);
+      this.visitingCallback(nextMinElement);
 
       sortedArray.push(nextMinElement);
     }

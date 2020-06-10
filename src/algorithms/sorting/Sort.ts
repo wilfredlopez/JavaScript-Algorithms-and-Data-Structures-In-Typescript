@@ -1,4 +1,6 @@
-import Comparator from "../../utils/comparator/Comparator";
+import Comparator, {
+  ComparatorCallBack,
+} from "../../utils/comparator/Comparator";
 
 /**
  * @typedef {Object} SorterCallbacks
@@ -9,7 +11,8 @@ import Comparator from "../../utils/comparator/Comparator";
  */
 
 export default abstract class Sort<T extends any = any> {
-  protected visitingCallback: (value: T[]) => void = () => {};
+  protected visitingCallback: (arr?: any[]) => (value: any) => void = () =>
+    () => {};
   // protected comparator: (a: T, b: T) => number;
   protected comparator: Comparator<T>;
 
@@ -27,19 +30,21 @@ export default abstract class Sort<T extends any = any> {
     return this.comparator.equal(a, b);
   }
 
+  compareCallback: ComparatorCallBack<T>;
+
   constructor({
     visitingCallback,
     compareCallback,
   }: {
-    visitingCallback?: (value: T[]) => void;
-    compareCallback?: Comparator<T>;
+    visitingCallback?: () => (value: any) => void;
+    compareCallback?: ComparatorCallBack<T>;
   } = {}) {
     if (visitingCallback !== undefined) {
       this.visitingCallback = visitingCallback;
     }
 
     if (compareCallback !== undefined) {
-      this.comparator = compareCallback;
+      this.comparator = new Comparator(compareCallback);
     } else {
       this.comparator = new Comparator((a, b) => {
         if (a < b) {
@@ -50,6 +55,7 @@ export default abstract class Sort<T extends any = any> {
         }
         return 0;
       });
+
       // this.comparator = (a: T, b: T) => {
       //   if (a < b) {
       //     return -1;
@@ -60,6 +66,8 @@ export default abstract class Sort<T extends any = any> {
       //   return 0;
       // };
     }
+    this.compareCallback = compareCallback ||
+      this.comparator.defaultCompareFunction;
   }
 
   abstract sort(arr: T[]): T[];

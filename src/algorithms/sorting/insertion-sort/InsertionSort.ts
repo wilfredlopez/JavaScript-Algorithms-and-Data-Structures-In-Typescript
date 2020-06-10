@@ -1,7 +1,7 @@
-import Sort from '../Sort';
+import Sort from "../Sort";
 
 export default class InsertionSort extends Sort {
-  sort(originalArray) {
+  sort(originalArray: any[]) {
     const array = [...originalArray];
 
     // Go through all array elements...
@@ -9,16 +9,16 @@ export default class InsertionSort extends Sort {
       let currentIndex = i;
 
       // Call visiting callback.
-      this.callbacks.visitingCallback(array[i]);
+      this.visitingCallback(array[i]);
 
       // Go and check if previous elements and greater then current one.
       // If this is the case then swap that elements.
       while (
-        array[currentIndex - 1] !== undefined
-        && this.comparator.lessThan(array[currentIndex], array[currentIndex - 1])
+        array[currentIndex - 1] !== undefined &&
+        this.comparator.lessThan(array[currentIndex], array[currentIndex - 1])
       ) {
         // Call visiting callback.
-        this.callbacks.visitingCallback(array[currentIndex - 1]);
+        this.visitingCallback(array[currentIndex - 1]);
 
         // Swap the elements.
         const tmp = array[currentIndex - 1];

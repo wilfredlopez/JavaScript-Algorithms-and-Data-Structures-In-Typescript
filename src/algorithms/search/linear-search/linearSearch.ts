@@ -1,4 +1,4 @@
-import Comparator from '../../../utils/comparator/Comparator';
+import Comparator from "../../../utils/comparator/Comparator";
 
 /**
  * Linear search implementation.
@@ -8,9 +8,13 @@ import Comparator from '../../../utils/comparator/Comparator';
  * @param {function(a, b)} [comparatorCallback]
  * @return {number[]}
  */
-export default function linearSearch(array, seekElement, comparatorCallback) {
-  const comparator = new Comparator(comparatorCallback);
-  const foundIndices = [];
+export default function linearSearch<T extends any>(
+  array: T[],
+  seekElement: T,
+  comparatorCallback?: (a: T, b: T) => 0 | 1 | -1,
+) {
+  const comparator = new Comparator<T>(comparatorCallback);
+  const foundIndices: number[] = [];
 
   array.forEach((element, index) => {
     if (comparator.equal(element, seekElement)) {
