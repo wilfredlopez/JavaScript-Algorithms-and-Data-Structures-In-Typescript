@@ -29,7 +29,6 @@ describe("eulerianPath", () => {
 
       eulerianPath(graph);
     }
-
     expect(findEulerianPathInNotEulerianGraph).toThrowError();
   });
 

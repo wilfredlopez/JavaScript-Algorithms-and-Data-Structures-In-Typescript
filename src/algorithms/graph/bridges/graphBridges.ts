@@ -103,7 +103,9 @@ export default function graphBridges(graph: Graph) {
         visitedSet[previousVertex.getKey()].discoveryTime;
       if (parentDiscoveryTime < currentLowDiscoveryTime) {
         const bridge = graph.findEdge(previousVertex, currentVertex)!;
-        bridges[bridge.getKey()] = bridge;
+        if (bridge) {
+          bridges[bridge.getKey()] = bridge;
+        }
       }
     },
     allowTraversal: ({ nextVertex }: { nextVertex: GraphVertex }) => {

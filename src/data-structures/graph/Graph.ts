@@ -67,7 +67,9 @@ export default class Graph {
   }
 
   deleteEdge(edge: GraphEdge): void {
-    const index = this.edges.findIndex((ed) => ed === edge);
+    const index = this.edges.findIndex((existing) =>
+      existing.getKey() === edge.getKey()
+    );
     if (index === -1) {
       throw new Error("That edge doesn't exist.");
     }
@@ -100,8 +102,11 @@ export default class Graph {
   }
 
   getVerticesIndices() {
-    let ret: any = {};
-    this.vertices.forEach((vertex, index) => (ret[vertex.value] = index));
+    let ret: { [key: string]: number } = {};
+    for (let i = 0; i < this.vertices.length; i++) {
+      ret[this.vertices[i].value] = i;
+    }
+    // this.vertices.forEach((vertex, index) => (ret[vertex.value] = index));
     return ret;
   }
 

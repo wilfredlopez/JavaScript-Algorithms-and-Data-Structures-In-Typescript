@@ -7,7 +7,11 @@ import ComplexNumber from "../../complex-number/ComplexNumber";
  * @param {Number} delta
  * @return {boolean}
  */
-function sequencesApproximatelyEqual(sequence1, sequence2, delta) {
+function sequencesApproximatelyEqual(
+  sequence1: ComplexNumber[],
+  sequence2: ComplexNumber[],
+  delta: number,
+) {
   if (sequence1.length !== sequence2.length) {
     return false;
   }
@@ -39,10 +43,10 @@ describe("fastFourierTransform", () => {
     const invertedOutput = fastFourierTransform(output, true);
 
     expect(sequencesApproximatelyEqual(expectedOutput, output, delta)).toBe(
-      true
+      true,
     );
     expect(sequencesApproximatelyEqual(input, invertedOutput, delta)).toBe(
-      true
+      true,
     );
   });
 
@@ -50,24 +54,24 @@ describe("fastFourierTransform", () => {
     const input = [
       new ComplexNumber({ re: 1, im: 2 }),
       new ComplexNumber({ re: 2, im: 3 }),
-      new ComplexNumber({ re: 8, im: 4 })
+      new ComplexNumber({ re: 8, im: 4 }),
     ];
 
     const expectedOutput = [
       new ComplexNumber({ re: 11, im: 9 }),
       new ComplexNumber({ re: -10, im: 0 }),
       new ComplexNumber({ re: 7, im: 3 }),
-      new ComplexNumber({ re: -4, im: -4 })
+      new ComplexNumber({ re: -4, im: -4 }),
     ];
 
     const output = fastFourierTransform(input);
     const invertedOutput = fastFourierTransform(output, true);
 
     expect(sequencesApproximatelyEqual(expectedOutput, output, delta)).toBe(
-      true
+      true,
     );
     expect(sequencesApproximatelyEqual(input, invertedOutput, delta)).toBe(
-      true
+      true,
     );
   });
 
@@ -82,7 +86,7 @@ describe("fastFourierTransform", () => {
       new ComplexNumber({ re: -9892.575367044381, im: -81748.44671677813 }),
       new ComplexNumber({ re: -35933.00356823792, im: -46153.47157161784 }),
       new ComplexNumber({ re: -22425.008561855735, im: -86284.24507370662 }),
-      new ComplexNumber({ re: -39327.43830818355, im: 30611.949874562706 })
+      new ComplexNumber({ re: -39327.43830818355, im: 30611.949874562706 }),
     ];
 
     const expectedOutput = [
@@ -101,17 +105,17 @@ describe("fastFourierTransform", () => {
       new ComplexNumber({ re: 192234.0276101, im: 160833.3072355 }),
       new ComplexNumber({ re: -96389.4195635, im: 393408.4543872 }),
       new ComplexNumber({ re: -173449.0825417, im: 146875.7724104 }),
-      new ComplexNumber({ re: -179002.5662573, im: 239821.0124341 })
+      new ComplexNumber({ re: -179002.5662573, im: 239821.0124341 }),
     ];
 
     const output = fastFourierTransform(input);
     const invertedOutput = fastFourierTransform(output, true);
 
     expect(sequencesApproximatelyEqual(expectedOutput, output, delta)).toBe(
-      true
+      true,
     );
     expect(sequencesApproximatelyEqual(input, invertedOutput, delta)).toBe(
-      true
+      true,
     );
   });
 });
