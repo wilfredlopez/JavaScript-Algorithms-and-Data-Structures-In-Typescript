@@ -1,5 +1,6 @@
 import { KeyValue } from "./../../../utils/KeyValue";
 import DisjointSet from "../DisjointSet";
+import GraphVertex from "../../graph/GraphVertex";
 
 describe("DisjointSet", () => {
   it("should throw error when trying to union and check not existing sets", () => {
@@ -82,7 +83,7 @@ describe("DisjointSet", () => {
   });
 
   it("should union smaller set with bigger one making bigger one to be new root", () => {
-    const disjointSet = new DisjointSet();
+    const disjointSet = new DisjointSet<string>();
 
     disjointSet
       .makeSet("A")
@@ -95,7 +96,7 @@ describe("DisjointSet", () => {
   });
 
   it("should do additional basic manipulations on disjoint set", () => {
-    const disjointSet = new DisjointSet();
+    const disjointSet = new DisjointSet<number>();
 
     const itemA = 1;
     const itemB = 2;

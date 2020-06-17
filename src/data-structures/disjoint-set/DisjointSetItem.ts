@@ -5,8 +5,8 @@ export default class DisjointSetItem<T extends any> {
   private _children: DisjointSetItem<T>[] = [];
   private _value: GraphVertex;
 
-  constructor(val: GraphVertex) {
-    this._value = val;
+  constructor(value: T) {
+    this._value = new GraphVertex<T>(value);
   }
 
   getSize() {

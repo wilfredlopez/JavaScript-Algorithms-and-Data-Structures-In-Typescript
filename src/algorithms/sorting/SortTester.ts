@@ -100,6 +100,10 @@ export const negativeArr = [-1, 0, 5, -10, 20, 13, -7, 3, 2, -3];
 export const negativeArrSorted = [-10, -7, -3, -1, 0, 2, 3, 5, 13, 20];
 
 export class SortTester<T extends Constructable> {
+  static testSort<T extends Constructable>(SortingClass: T) {
+    const sorter = new SortTester();
+    return sorter.testSort;
+  }
   testSort(SortingClass: T) {
     const sorter = new SortingClass();
 
@@ -117,11 +121,20 @@ export class SortTester<T extends Constructable> {
     expect(sorter.sort(equalArr)).toEqual(equalArr);
   }
 
+  static testNegativeNumbersSort<T extends Constructable>(SortingClass: T) {
+    const sorter = new SortTester();
+    return sorter.testNegativeNumbersSort.bind(this, SortingClass);
+  }
   testNegativeNumbersSort(SortingClass: T) {
     const sorter = new SortingClass();
     expect(sorter.sort(negativeArr)).toEqual(negativeArrSorted);
   }
-
+  static testSortWithCustomComparator<T extends Constructable>(
+    SortingClass: T,
+  ) {
+    const sorter = new SortTester();
+    return sorter.testSortWithCustomComparator.bind(this, SortingClass);
+  }
   testSortWithCustomComparator(SortingClass: T) {
     const callbacks = {
       compareCallback: (a: number[], b: number[]) => {
@@ -145,7 +158,10 @@ export class SortTester<T extends Constructable> {
     ]);
     expect(sorter.sort(["aa", "aa"])).toEqual(["aa", "aa"]);
   }
-
+  static testSortStability<T extends Constructable>(SortingClass: T) {
+    const sorter = new SortTester();
+    return sorter.testSortStability.bind(this, SortingClass);
+  }
   testSortStability(SortingClass: T) {
     const callbacks = {
       compareCallback: (a: number[], b: number[]) => {
@@ -168,6 +184,19 @@ export class SortTester<T extends Constructable> {
     ]);
   }
 
+  static testAlgorithmTimeComplexity<T extends Constructable>(
+    SortingClass: T,
+    arrayToBeSorted: any[],
+    numberOfVisits: number,
+  ) {
+    const sorter = new SortTester();
+    return sorter.testAlgorithmTimeComplexity.bind(
+      this,
+      SortingClass,
+      arrayToBeSorted,
+      numberOfVisits,
+    );
+  }
   testAlgorithmTimeComplexity(
     SortingClass: T,
     arrayToBeSorted: any[],

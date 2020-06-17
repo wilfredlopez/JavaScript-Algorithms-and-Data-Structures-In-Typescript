@@ -28,7 +28,7 @@ export default class BinaryTreeNode<T extends any = any> {
    * @return {number}
    */
   get leftHeight(): number {
-    if (!this.left) {
+    if (this.left === null) {
       return 0;
     }
 
@@ -39,7 +39,7 @@ export default class BinaryTreeNode<T extends any = any> {
    * @return {number}
    */
   get rightHeight(): number {
-    if (!this.right) {
+    if (this.right === null) {
       return 0;
     }
 
@@ -66,17 +66,17 @@ export default class BinaryTreeNode<T extends any = any> {
    */
   get uncle() {
     // Check if current node has parent.
-    if (!this.parent) {
+    if (this.parent === null) {
       return undefined;
     }
 
     // Check if current node has grand-parent.
-    if (!this.parent.parent) {
+    if (this.parent.parent === null) {
       return undefined;
     }
 
     // Check if grand-parent has two children.
-    if (!this.parent.parent.left || !this.parent.parent.right) {
+    if (this.parent.parent.left === null || this.parent.parent.right === null) {
       return undefined;
     }
 
@@ -207,7 +207,7 @@ export default class BinaryTreeNode<T extends any = any> {
     let traverse: (T | null)[] = [];
 
     // Add left node.
-    if (this.left && this.left.value) {
+    if (this.left !== null && this.left.value !== null) {
       traverse = traverse.concat(this.left.traverseInOrder());
     }
 
@@ -215,7 +215,7 @@ export default class BinaryTreeNode<T extends any = any> {
     traverse.push(this.value);
 
     // Add right node.
-    if (this.right && this.right.value) {
+    if (this.right !== null && this.right.value !== null) {
       traverse = traverse.concat(this.right.traverseInOrder());
     }
 
@@ -226,7 +226,6 @@ export default class BinaryTreeNode<T extends any = any> {
    * @return {string}
    */
   toString() {
-    // return this.traverseInOrder().toString();
-    return "";
+    return this.traverseInOrder().toString();
   }
 }

@@ -4,7 +4,7 @@ import {
   notSortedArr,
   reverseArr,
   sortedArr,
-  SortTester
+  SortTester,
 } from "../../SortTester";
 
 // Complexity constants.
@@ -30,7 +30,7 @@ describe("QuickSortInPlace", () => {
     SortTester.testAlgorithmTimeComplexity(
       QuickSortInPlace,
       equalArr,
-      EQUAL_ARRAY_VISITING_COUNT
+      EQUAL_ARRAY_VISITING_COUNT,
     );
   });
 
@@ -38,7 +38,7 @@ describe("QuickSortInPlace", () => {
     SortTester.testAlgorithmTimeComplexity(
       QuickSortInPlace,
       sortedArr,
-      SORTED_ARRAY_VISITING_COUNT
+      SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
@@ -46,7 +46,7 @@ describe("QuickSortInPlace", () => {
     SortTester.testAlgorithmTimeComplexity(
       QuickSortInPlace,
       notSortedArr,
-      NOT_SORTED_ARRAY_VISITING_COUNT
+      NOT_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 
@@ -54,7 +54,7 @@ describe("QuickSortInPlace", () => {
     SortTester.testAlgorithmTimeComplexity(
       QuickSortInPlace,
       reverseArr,
-      REVERSE_SORTED_ARRAY_VISITING_COUNT
+      REVERSE_SORTED_ARRAY_VISITING_COUNT,
     );
   });
 });

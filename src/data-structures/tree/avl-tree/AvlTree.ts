@@ -13,7 +13,7 @@ export default class AvlTree<T extends any> extends BinarySearchTree<T> {
     // Let's move up to the root and check balance factors along the way.
     let currentNode: BinarySearchTreeNode<T> | null = this.root
       .find(value);
-    while (currentNode) {
+    while (currentNode !== null) {
       this.balance(currentNode);
       currentNode = currentNode.parent;
     }

@@ -6,7 +6,7 @@ describe("MinHeap", () => {
     const minHeap = new MinHeap();
 
     expect(minHeap).toBeDefined();
-    expect(minHeap.peek()).toBeUndefined();
+    expect(minHeap.peek()).toBeNull();
     expect(minHeap.isEmpty()).toBe(true);
   });
 
@@ -70,7 +70,7 @@ describe("MinHeap", () => {
     expect(minHeap.poll()).toBe(11);
     expect(minHeap.toString()).toBe("");
 
-    expect(minHeap.poll()).toBeUndefined();
+    expect(minHeap.poll()).toBeNull();
     expect(minHeap.toString()).toBe("");
   });
 
@@ -158,7 +158,7 @@ describe("MinHeap", () => {
 
     expect(minHeap.toString()).toBe("a,bb,ccc,dddd");
 
-    const comparator = new Comparator((a, b) => {
+    const comparator = new Comparator((a: any, b: any) => {
       if (a.length === b.length) {
         return 0;
       }

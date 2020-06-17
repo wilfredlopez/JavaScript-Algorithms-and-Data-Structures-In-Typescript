@@ -31,7 +31,9 @@ export default class BinarySearchTreeNode<T extends any = any>
    * @return {BinarySearchTreeNode}
    */
   insert(value: T | null = null): BinarySearchTreeNode {
-    if (this.nodeValueComparator.equal(this.value, null as any)) {
+    if (
+      this.value === null || this.nodeValueComparator.equal(this.value, value)
+    ) {
       this.value = value;
 
       return this;
@@ -40,11 +42,11 @@ export default class BinarySearchTreeNode<T extends any = any>
     if (this.nodeValueComparator.lessThan(value, this.value)) {
       // Insert to the left.
       if (this.left) {
-        return this.left.insert(value as any);
+        return this.left.insert(value);
       }
 
-      const newNode = new BinarySearchTreeNode(
-        value as any,
+      const newNode = new BinarySearchTreeNode<T>(
+        value,
         this.compareFunction,
       );
       this.setLeft(newNode);
@@ -55,11 +57,11 @@ export default class BinarySearchTreeNode<T extends any = any>
     if (this.nodeValueComparator.greaterThan(value, this.value)) {
       // Insert to the right.
       if (this.right) {
-        return this.right.insert(value as any);
+        return this.right.insert(value);
       }
 
-      const newNode = new BinarySearchTreeNode(
-        value as any,
+      const newNode = new BinarySearchTreeNode<T>(
+        value,
         this.compareFunction,
       );
       this.setRight(newNode);
@@ -100,7 +102,7 @@ export default class BinarySearchTreeNode<T extends any = any>
    * @return {boolean}
    */
   contains(value: T) {
-    return !!this.find(value);
+    return this.find(value) !== null;
   }
 
   /**
@@ -110,7 +112,7 @@ export default class BinarySearchTreeNode<T extends any = any>
   remove(value: T) {
     const nodeToRemove = this.find(value);
 
-    if (!nodeToRemove) {
+    if (nodeToRemove === null) {
       throw new Error("Item not found in the tree");
     }
 

@@ -2,7 +2,7 @@ import AvlTree from "../AvlTree";
 
 describe("AvlTree", () => {
   it("should do simple left-left rotation", () => {
-    const tree = new AvlTree();
+    const tree = new AvlTree<number>();
 
     tree.insert(4);
     tree.insert(3);
