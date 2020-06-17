@@ -4,10 +4,14 @@
  * @param {number[]} terraces
  * @return {number}
  */
-export default function bfRainTerraces(terraces) {
+export default function bfRainTerraces(terraces: number[]): number {
   let waterAmount = 0;
 
-  for (let terraceIndex = 0; terraceIndex < terraces.length; terraceIndex += 1) {
+  for (
+    let terraceIndex = 0;
+    terraceIndex < terraces.length;
+    terraceIndex += 1
+  ) {
     // Get left most high terrace.
     let leftHighestLevel = 0;
     for (let leftIndex = terraceIndex - 1; leftIndex >= 0; leftIndex -= 1) {
@@ -16,7 +20,11 @@ export default function bfRainTerraces(terraces) {
 
     // Get right most high terrace.
     let rightHighestLevel = 0;
-    for (let rightIndex = terraceIndex + 1; rightIndex < terraces.length; rightIndex += 1) {
+    for (
+      let rightIndex = terraceIndex + 1;
+      rightIndex < terraces.length;
+      rightIndex += 1
+    ) {
       rightHighestLevel = Math.max(rightHighestLevel, terraces[rightIndex]);
     }
 
@@ -25,7 +33,8 @@ export default function bfRainTerraces(terraces) {
     if (terraceBoundaryLevel > terraces[terraceIndex]) {
       // Terrace will be able to store the water if the lowest of two left and right highest
       // terraces are still higher than the current one.
-      waterAmount += Math.min(leftHighestLevel, rightHighestLevel) - terraces[terraceIndex];
+      waterAmount += Math.min(leftHighestLevel, rightHighestLevel) -
+        terraces[terraceIndex];
     }
   }
 

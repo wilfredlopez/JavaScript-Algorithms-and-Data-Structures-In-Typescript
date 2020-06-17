@@ -5,7 +5,7 @@
  * @param {number} height - Height of the board.
  * @return {number} - Number of unique paths.
  */
-export default function dpUniquePaths(width, height) {
+export default function dpUniquePaths(width: number, height: number) {
   // Init board.
   const board = Array(height).fill(null).map(() => {
     return Array(width).fill(0);

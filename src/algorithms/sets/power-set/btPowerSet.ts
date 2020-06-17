@@ -5,7 +5,12 @@
  * @param {number} startAt - The position of in original set we're starting to form current subset.
  * @return {*[][]} - All subsets of original set.
  */
-function btPowerSetRecursive(originalSet, allSubsets = [[]], currentSubSet = [], startAt = 0) {
+function btPowerSetRecursive<T extends any>(
+  originalSet: T[],
+  allSubsets: Array<T[]> = [[]],
+  currentSubSet: T[] = [],
+  startAt = 0,
+) {
   // Let's iterate over originalSet elements that may be added to the subset
   // without having duplicates. The value of startAt prevents adding the duplicates.
   for (let position = startAt; position < originalSet.length; position += 1) {
@@ -36,6 +41,6 @@ function btPowerSetRecursive(originalSet, allSubsets = [[]], currentSubSet = [],
  * @param {*[]} originalSet
  * @return {*[][]}
  */
-export default function btPowerSet(originalSet) {
+export default function btPowerSet<T extends any>(originalSet: T[]) {
   return btPowerSetRecursive(originalSet);
 }

@@ -4,13 +4,13 @@
  * @param {number} totalStairs - Number of stairs to climb on.
  * @return {number} - Number of ways to climb a staircase.
  */
-export default function recursiveStaircaseMEM(totalStairs) {
+export default function recursiveStaircaseMEM(totalStairs: number) {
   // Memo table that will hold all recursively calculated results to avoid calculating them
   // over and over again.
-  const memo = [];
+  const memo: number[] = [];
 
   // Recursive closure.
-  const getSteps = (stairsNum) => {
+  const getSteps = (stairsNum: number) => {
     if (stairsNum <= 0) {
       // There is no way to go down - you climb the stairs only upwards.
       // Also if you're standing on the ground floor that you don't need to do any further steps.

@@ -29,7 +29,7 @@ describe("sieveOfEratosthenes", () => {
       79,
       83,
       89,
-      97
+      97,
     ]);
   });
 });

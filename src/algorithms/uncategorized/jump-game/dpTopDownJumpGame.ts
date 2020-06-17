@@ -18,10 +18,10 @@
  * @return {boolean}
  */
 export default function dpTopDownJumpGame(
-  numbers,
+  numbers: number[],
   startIndex = 0,
-  currentJumps = [],
-  cellsGoodness = [],
+  currentJumps: number[] = [],
+  cellsGoodness: Array<boolean | undefined> = [],
 ) {
   if (startIndex === numbers.length - 1) {
     // We've jumped directly to last cell. This situation is a solution.
@@ -30,7 +30,7 @@ export default function dpTopDownJumpGame(
 
   // Init cell goodness table if it is empty.
   // This is DYNAMIC PROGRAMMING feature.
-  const currentCellsGoodness = [...cellsGoodness];
+  const currentCellsGoodness: Array<boolean | undefined> = [...cellsGoodness];
   if (!currentCellsGoodness.length) {
     numbers.forEach(() => currentCellsGoodness.push(undefined));
     // Mark the last cell as "good" one since it is where we ultimately want to get.

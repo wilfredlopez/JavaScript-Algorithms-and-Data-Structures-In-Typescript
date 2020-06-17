@@ -4,7 +4,7 @@
  * @param {number} stairsNum - Number of stairs to climb on.
  * @return {number} - Number of ways to climb a staircase.
  */
-export default function recursiveStaircaseBF(stairsNum) {
+export default function recursiveStaircaseBF(stairsNum: number): number {
   if (stairsNum <= 0) {
     // There is no way to go down - you climb the stairs only upwards.
     // Also if you're standing on the ground floor that you don't need to do any further steps.
@@ -23,5 +23,6 @@ export default function recursiveStaircaseBF(stairsNum) {
 
   // Sum up how many steps we need to take after doing one step up with the number of
   // steps we need to take after doing two steps up.
-  return recursiveStaircaseBF(stairsNum - 1) + recursiveStaircaseBF(stairsNum - 2);
+  return recursiveStaircaseBF(stairsNum - 1) +
+    recursiveStaircaseBF(stairsNum - 2);
 }

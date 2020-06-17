@@ -16,7 +16,7 @@
  * @param {number[]} numbers - array of possible jump length.
  * @return {boolean}
  */
-export default function dpBottomUpJumpGame(numbers) {
+export default function dpBottomUpJumpGame(numbers: number[]) {
   // Init cells goodness table.
   const cellsGoodness = Array(numbers.length).fill(undefined);
   // Mark the last cell as "good" one since it is where we ultimately want to get.
