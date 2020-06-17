@@ -1,33 +1,42 @@
+interface StorageI {
+  getValue: (index: number) => boolean;
+  setValue: (index: number) => void;
+}
+
 export default class BloomFilter {
   /**
    * @param {number} size - the size of the storage.
    */
-  constructor(size = 100) {
+  #storage: StorageI;
+  constructor(public size = 100) {
     // Bloom filter size directly affects the likelihood of false positives.
     // The bigger the size the lower the likelihood of false positives.
-    this.size = size;
-    this.storage = this.createStore(size);
+    this.#storage = this.createStore(size);
+  }
+
+  getValue(index: number) {
+    return this.#storage.getValue(index);
   }
 
   /**
    * @param {string} item
    */
-  insert(item) {
+  insert(item: string) {
     const hashValues = this.getHashValues(item);
 
     // Set each hashValue index to true.
-    hashValues.forEach(val => this.storage.setValue(val));
+    hashValues.forEach((val) => this.#storage.setValue(val));
   }
 
   /**
    * @param {string} item
    * @return {boolean}
    */
-  mayContain(item) {
+  mayContain(item: string) {
     const hashValues = this.getHashValues(item);
 
     for (let hashIndex = 0; hashIndex < hashValues.length; hashIndex += 1) {
-      if (!this.storage.getValue(hashValues[hashIndex])) {
+      if (!this.#storage.getValue(hashValues[hashIndex])) {
         // We know that the item was definitely not inserted.
         return false;
       }
@@ -46,19 +55,23 @@ export default class BloomFilter {
    * @param {number} size
    * @return {Object}
    */
-  createStore(size) {
-    const storage = [];
+  createStore(size: number) {
+    const storage: boolean[] = [];
 
     // Initialize all indexes to false
-    for (let storageCellIndex = 0; storageCellIndex < size; storageCellIndex += 1) {
+    for (
+      let storageCellIndex = 0;
+      storageCellIndex < size;
+      storageCellIndex += 1
+    ) {
       storage.push(false);
     }
 
     const storageInterface = {
-      getValue(index) {
+      getValue(index: number) {
         return storage[index];
       },
-      setValue(index) {
+      setValue(index: number) {
         storage[index] = true;
       },
     };
@@ -70,7 +83,7 @@ export default class BloomFilter {
    * @param {string} item
    * @return {number}
    */
-  hash1(item) {
+  hash1(item: string) {
     let hash = 0;
 
     for (let charIndex = 0; charIndex < item.length; charIndex += 1) {
@@ -87,7 +100,7 @@ export default class BloomFilter {
    * @param {string} item
    * @return {number}
    */
-  hash2(item) {
+  hash2(item: string) {
     let hash = 5381;
 
     for (let charIndex = 0; charIndex < item.length; charIndex += 1) {
@@ -102,7 +115,7 @@ export default class BloomFilter {
    * @param {string} item
    * @return {number}
    */
-  hash3(item) {
+  hash3(item: string) {
     let hash = 0;
 
     for (let charIndex = 0; charIndex < item.length; charIndex += 1) {
@@ -121,7 +134,7 @@ export default class BloomFilter {
    * @param {string} item
    * @return {number[]}
    */
-  getHashValues(item) {
+  getHashValues(item: string) {
     return [
       this.hash1(item),
       this.hash2(item),

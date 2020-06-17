@@ -53,7 +53,7 @@ describe("bellmanFord", () => {
       C: 3,
       D: 9,
       G: 12,
-      F: 11
+      F: 11,
     });
 
     expect(previousVertices.F.getKey()).toBe("D");
@@ -104,7 +104,7 @@ describe("bellmanFord", () => {
       B: 5,
       C: 7,
       D: 9,
-      E: 8
+      E: 8,
     });
 
     expect(previousVertices.H).toBeNull();

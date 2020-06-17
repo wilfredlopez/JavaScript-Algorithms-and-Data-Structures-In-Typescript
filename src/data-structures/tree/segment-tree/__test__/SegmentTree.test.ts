@@ -44,7 +44,7 @@ describe("SegmentTree", () => {
       0,
       2,
       null,
-      null
+      null,
     ]);
     expect(segmentTree.segmentTree.length).toBe(2 * 8 - 1);
   });
@@ -59,7 +59,7 @@ describe("SegmentTree", () => {
 
   it("should build sum array", () => {
     const array = [-1, 2, 4, 0];
-    const segmentTree = new SegmentTree(array, (a, b) => a + b, 0);
+    const segmentTree = new SegmentTree(array, (a: any, b: any) => a + b, 0);
 
     expect(segmentTree.segmentTree).toEqual([5, 1, 4, -1, 2, 4, 0]);
     expect(segmentTree.segmentTree.length).toBe(2 * array.length - 1);
@@ -103,7 +103,7 @@ describe("SegmentTree", () => {
 
   it("should do sum range query", () => {
     const array = [-1, 3, 4, 0, 2, 1];
-    const segmentTree = new SegmentTree(array, (a, b) => a + b, 0);
+    const segmentTree = new SegmentTree(array, (a: any, b: any) => a + b, 0);
 
     expect(segmentTree.rangeQuery(0, 5)).toBe(9);
     expect(segmentTree.rangeQuery(0, 1)).toBe(2);

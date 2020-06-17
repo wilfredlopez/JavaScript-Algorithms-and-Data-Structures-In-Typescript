@@ -13,6 +13,7 @@ export default class BinarySearchTreeNode<T extends any = any>
   nodeValueComparator: Comparator<(T | null)>;
   left: BinarySearchTreeNode<T> | null = null;
   right: BinarySearchTreeNode<T> | null = null;
+  parent: BinarySearchTreeNode<T> | null = null;
   constructor(
     value: T | null = null,
     compareFunction?: ComparatorCallBack<(T | null)>,

@@ -20,11 +20,14 @@ the data.
 - `B` [Priority Queue](src/data-structures/priority-queue)
 - `A` [Trie](src/data-structures/trie)
 - `A` [Tree](src/data-structures/tree)
+
   - `A` [Binary Search Tree](src/data-structures/tree/binary-search-tree)
   - `A` [AVL Tree](src/data-structures/tree/avl-tree)
   - `A` [Red-Black Tree](src/data-structures/tree/red-black-tree)
   - `A` [Segment Tree](src/data-structures/tree/segment-tree) - with min/max/sum range queries examples
+
   - `A` [Fenwick Tree](src/data-structures/tree/fenwick-tree) (Binary Indexed Tree)
+
 - `A` [Graph](src/data-structures/graph) (both directed and undirected)
 - `A` [Disjoint Set](src/data-structures/disjoint-set)
 - `A` [Bloom Filter](src/data-structures/bloom-filter)

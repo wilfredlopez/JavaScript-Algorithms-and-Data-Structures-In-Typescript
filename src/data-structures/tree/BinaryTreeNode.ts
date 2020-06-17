@@ -49,7 +49,7 @@ export default class BinaryTreeNode<T extends any = any> {
   /**
    * @return {number}
    */
-  get height() {
+  get height(): number {
     return Math.max(this.leftHeight, this.rightHeight);
   }
 
@@ -207,7 +207,7 @@ export default class BinaryTreeNode<T extends any = any> {
     let traverse: (T | null)[] = [];
 
     // Add left node.
-    if (this.left) {
+    if (this.left && this.left.value) {
       traverse = traverse.concat(this.left.traverseInOrder());
     }
 
@@ -215,7 +215,7 @@ export default class BinaryTreeNode<T extends any = any> {
     traverse.push(this.value);
 
     // Add right node.
-    if (this.right) {
+    if (this.right && this.right.value) {
       traverse = traverse.concat(this.right.traverseInOrder());
     }
 
@@ -226,6 +226,7 @@ export default class BinaryTreeNode<T extends any = any> {
    * @return {string}
    */
   toString() {
-    return this.traverseInOrder().toString();
+    // return this.traverseInOrder().toString();
+    return "";
   }
 }

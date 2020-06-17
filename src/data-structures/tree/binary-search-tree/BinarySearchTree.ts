@@ -8,7 +8,7 @@ export default class BinarySearchTree<T extends any> {
    * @param {function} [nodeValueCompareFunction]
    */
   root: BinarySearchTreeNode<T>;
-  nodeComparator: Comparator<T>;
+  nodeComparator: Comparator<any>;
   value: T | null = null;
   constructor(nodeValueCompareFunction?: ComparatorCallBack) {
     this.root = new BinarySearchTreeNode<T>(null, nodeValueCompareFunction);

@@ -1,27 +1,30 @@
-import depthFirstSearch from '../depth-first-search/depthFirstSearch';
+import depthFirstSearch from "../depth-first-search/depthFirstSearch";
+import Graph from "../../../data-structures/graph/Graph";
+import GraphVertex from "../../../data-structures/graph/GraphVertex";
+import { VertexPar } from "../articulation-points/articulationPoints";
 
 /**
  * Detect cycle in directed graph using Depth First Search.
  *
  * @param {Graph} graph
  */
-export default function detectDirectedCycle(graph) {
-  let cycle = null;
+export default function detectDirectedCycle(graph: Graph) {
+  let cycle: { [key: string]: GraphVertex } | null = null;
 
   // Will store parents (previous vertices) for all visited nodes.
   // This will be needed in order to specify what path exactly is a cycle.
-  const dfsParentMap = {};
+  const dfsParentMap: { [key: string]: GraphVertex } = {};
 
   // White set (UNVISITED) contains all the vertices that haven't been visited at all.
-  const whiteSet = {};
+  const whiteSet: { [key: string]: GraphVertex } = {};
 
   // Gray set (VISITING) contains all the vertices that are being visited right now
   // (in current path).
-  const graySet = {};
+  const graySet: { [key: string]: GraphVertex } = {};
 
   // Black set (VISITED) contains all the vertices that has been fully visited.
   // Meaning that all children of the vertex has been visited.
-  const blackSet = {};
+  const blackSet: { [key: string]: GraphVertex } = {};
 
   // If we encounter vertex in gray set it means that we've found a cycle.
   // Because when vertex in gray set it means that its neighbors or its neighbors
@@ -35,7 +38,7 @@ export default function detectDirectedCycle(graph) {
 
   // Describe BFS callbacks.
   const callbacks = {
-    enterVertex: ({ currentVertex, previousVertex }) => {
+    enterVertex: ({ currentVertex, previousVertex }: VertexPar) => {
       if (graySet[currentVertex.getKey()]) {
         // If current vertex already in grey set it means that cycle is detected.
         // Let's detect cycle path.
@@ -44,29 +47,32 @@ export default function detectDirectedCycle(graph) {
         let currentCycleVertex = currentVertex;
         let previousCycleVertex = previousVertex;
 
-        while (previousCycleVertex.getKey() !== currentVertex.getKey()) {
+        while (
+          previousCycleVertex &&
+          previousCycleVertex.getKey() !== currentVertex.getKey()
+        ) {
           cycle[currentCycleVertex.getKey()] = previousCycleVertex;
           currentCycleVertex = previousCycleVertex;
-          previousCycleVertex = dfsParentMap[previousCycleVertex.getKey()];
+          previousCycleVertex = dfsParentMap[previousCycleVertex.getKey()]!;
         }
 
-        cycle[currentCycleVertex.getKey()] = previousCycleVertex;
+        cycle[currentCycleVertex.getKey()] = previousCycleVertex!;
       } else {
         // Otherwise let's add current vertex to gray set and remove it from white set.
         graySet[currentVertex.getKey()] = currentVertex;
         delete whiteSet[currentVertex.getKey()];
 
         // Update DFS parents list.
-        dfsParentMap[currentVertex.getKey()] = previousVertex;
+        dfsParentMap[currentVertex.getKey()] = previousVertex!;
       }
     },
-    leaveVertex: ({ currentVertex }) => {
+    leaveVertex: ({ currentVertex }: VertexPar) => {
       // If all node's children has been visited let's remove it from gray set
       // and move it to the black set meaning that all its neighbors are visited.
       blackSet[currentVertex.getKey()] = currentVertex;
       delete graySet[currentVertex.getKey()];
     },
-    allowTraversal: ({ nextVertex }) => {
+    allowTraversal: ({ nextVertex }: { nextVertex: GraphVertex }) => {
       // If cycle was detected we must forbid all further traversing since it will
       // cause infinite traversal loop.
       if (cycle) {

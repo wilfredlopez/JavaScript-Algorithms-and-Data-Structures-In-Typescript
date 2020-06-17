@@ -2,7 +2,7 @@ import Graph from "../../../data-structures/graph/Graph";
 import GraphVertex from "../../../data-structures/graph/GraphVertex";
 import { VertexPar } from "../articulation-points/articulationPoints";
 
-interface DFSCallbacks {
+export interface DFSCallbacks {
   enterVertex: ({ currentVertex, previousVertex }: VertexPar) => void;
   leaveVertex: ({ currentVertex, previousVertex }: VertexPar) => void;
   allowTraversal: ({}: {
